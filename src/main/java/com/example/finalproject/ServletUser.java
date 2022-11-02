@@ -1,3 +1,8 @@
+/**
+ * The class shows information for users, take in DB information about the user and his orders and shows on
+ * the page
+ * @author Kuznietsov Rostyslav
+ */
 package com.example.finalproject;
 
 import com.logic.finalproject.Craftsman;
@@ -9,7 +14,6 @@ import jakarta.servlet.annotation.*;
 import com.mysql.cj.jdbc.Driver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -51,7 +55,6 @@ public class ServletUser extends HttpServlet {
                 }
             }
         }
-      //  PrintWriter printWriter = response.getWriter();
 
         logger.info("User id {} , login {}", id, login);
         if(entity.equals("user") && id > 0) {
@@ -92,7 +95,6 @@ public class ServletUser extends HttpServlet {
             logger.error("Catch exception", e);
            throw new RuntimeException(e);
         }
-
 
             PrintWriter printWriter = response.getWriter();
             printWriter.println(startPageStartTitle);
@@ -145,10 +147,8 @@ public class ServletUser extends HttpServlet {
             printWriter.println(" </table>" );
             printWriter.println(" <hr>" );
             printWriter.println(" <form action=\"/create-new-order\" method=\"get\">" +
-                    //     "<input type = \"hiden\" login=\"" + login + "\" password=\"" + password + "\">" +
-                    " <input type=\"submit\" value=\"Create new order\" /> </form>" );
+                                " <input type=\"submit\" value=\"Create new order\" /> </form>" );
             printWriter.println(" <hr>" );
-            //   printWriter.println("<p><a href = \"/create-new-order" + param + "\"> Create new order</a> </p>" );
             printWriter.println(finishPage(lang));
         } else {
             logger.warn("Something try come in page without rights, redirect to main page");

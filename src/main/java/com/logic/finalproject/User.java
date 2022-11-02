@@ -1,3 +1,9 @@
+/**
+ * The class creates the entity "user"
+ *
+ * @author Kuznietsov Rostyslav
+ */
+
 package com.logic.finalproject;
 
 public class User extends Parent{

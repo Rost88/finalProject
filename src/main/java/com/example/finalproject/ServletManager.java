@@ -1,21 +1,23 @@
+/**
+ * The class shows information for managers, take in DB information about the manager and all orders and shows on
+ * the page
+ * @author Kuznietsov Rostyslav
+ */
+
 package com.example.finalproject;
 
 import com.logic.finalproject.Manager;
 import com.logic.finalproject.Order;
-import com.logic.finalproject.Parent;
-import com.logic.finalproject.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.pageConstructor.finalproject.PageConstructor.*;
 
 @WebServlet(name = "ServletManager", value = "/ServletManager")
@@ -25,7 +27,7 @@ public class ServletManager extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String entity = "";
+
         String sort = request.getParameter("sort");
         if(sort == null)
             sort = "";
@@ -52,7 +54,6 @@ public class ServletManager extends HttpServlet {
             lang = request.getParameter("lang");
         session.setAttribute("langv",lang);
 
-
         logger.info("Manager page, parameters: {} {} {} {} {}" , sort, checkStatus, checkCraftsman, currentPage, pagination);
 
         Cookie[] cookies = request.getCookies();
@@ -62,7 +63,6 @@ public class ServletManager extends HttpServlet {
             for (Cookie cook : cookies) {
                 if (cook.getName().equals("entity") && cook.getValue().equals("managers")) {
                     isManager = true;
-         //           entity = cook.getValue();
 
                 }
                 if (cook.getName().equals("managerID"))
@@ -116,7 +116,6 @@ public class ServletManager extends HttpServlet {
                 printWriter.println("<br>password: " + manager.getPassword());
                 printWriter.println("</td></tr></table><br>");
                 printWriter.println("<hr>");
-
                 printWriter.println(ShowTable.filters(sort, pagination, lang));
                 printWriter.println("<hr>");
                 printWriter.println(ShowTable.pagination(sort, checkStatus, checkCraftsman));

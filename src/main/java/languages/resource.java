@@ -1,3 +1,8 @@
+/**
+ * The class helps to realize translating webapp to different languages
+ * Default language is english
+ * @author Kuznietsov Rostyslav
+ */
 package languages;
 
 import java.util.ListResourceBundle;

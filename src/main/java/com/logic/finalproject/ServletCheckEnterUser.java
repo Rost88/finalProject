@@ -1,3 +1,8 @@
+/**
+ * The class checks user's login and password and take him an authorisation in system
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 import jakarta.servlet.*;

@@ -1,22 +1,27 @@
+/**
+ * The class shows information for everybody. It helps to create request to BD, tables with feedback about craftsmen
+ * on the page "Our team"
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.example.finalproject;
 
 import com.logic.finalproject.Craftsman;
 import com.logic.finalproject.Feedbacks;
-import com.logic.finalproject.Order;
-import com.logic.finalproject.User;
-import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class ShowTeam {
-
-
     private static final Logger logger = LoggerFactory.getLogger(ShowTeam.class);
+
+    /**
+     * The method take feedbacks about craftsmen from Data base and put feedbacks into the table
+     * @param id
+     * @return
+     */
     public static String showFeedbacks(int id) {
         List<Feedbacks> allFeedbacks = new ArrayList<>();
         try {
@@ -55,6 +60,11 @@ public class ShowTeam {
 
         return table;
     }
+
+    /**
+     * This method returns craftsman's list
+     * @return
+     */
     public static List<Craftsman> craftsmanList() {
         List<Craftsman> craftsmen = new ArrayList<>();
         try {
@@ -83,6 +93,10 @@ public class ShowTeam {
         return craftsmen;
     }
 
+    /**
+     * This method put craftsman's list into the table
+     * @return
+     */
     public static String tableCraftsmen() {
         String table = "<center><table width = 95%>";
         for (int i = 1; i < craftsmanList().size(); i++){

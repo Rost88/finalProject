@@ -1,3 +1,8 @@
+/**
+ * The class creates the user's order
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 import java.util.Date;
@@ -16,7 +21,6 @@ public class Order {
     public Order(String name, String description) {
         this.name = name;
         this.description = description;
-        this.user = user;
         this.status = "PENDING PAYMENT";
     }
     public Order(){

@@ -1,5 +1,5 @@
 /**
- * The class shows information for craftsmen, take in DB information about orders and shows on
+ * The class shows information for craftsmen, take in DB information about the craftsman and his orders and shows on
  * the page
  * @author Kuznietsov Rostyslav
  */

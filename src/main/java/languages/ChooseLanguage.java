@@ -1,3 +1,8 @@
+/**
+ * The class helps to realize translating webapp to different languages
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package languages;
 
 import com.mysql.cj.Session;

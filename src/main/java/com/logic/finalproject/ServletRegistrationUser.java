@@ -1,3 +1,8 @@
+/**
+ * The class checks user's login, name and password and put them in Data base
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 import jakarta.servlet.*;
@@ -31,15 +36,6 @@ public class ServletRegistrationUser extends HttpServlet {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         logger.info("Registration new user login {}, name {}", login, name);
-        PrintWriter printWriter = response.getWriter();
-      //  printWriter.println(startPageStartTitle);
-        printWriter.println("Страница регистрации нового user");
-      //  printWriter.println(finishTitleStartBody("uk"));
-        printWriter.println("Страница регистрации нового user");
-        printWriter.println("<br> login = " + login);
-        printWriter.println("<br> name = " + name);
-        printWriter.println("<br> password = " + password);
-
 
         try {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
@@ -57,8 +53,6 @@ public class ServletRegistrationUser extends HttpServlet {
             logger.error("New user wasn't registred", e);
             throw new RuntimeException(e);
         }
-     //   printWriter.println(finishPage);
-
         logger.info("New user was registrated login {} name {}", login, name);
         response.sendRedirect("/autorisation-users");
     }

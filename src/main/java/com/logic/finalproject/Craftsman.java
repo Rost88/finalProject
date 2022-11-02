@@ -1,3 +1,8 @@
+/**
+ * The class creates the entity "craftsman"
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 public class Craftsman extends Parent {

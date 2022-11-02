@@ -1,24 +1,38 @@
+/**
+ * The class shows information for managers. It helps to create request to BD, tables with orders, applied filters
+ * and others.
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.example.finalproject;
 
 import com.logic.finalproject.Craftsman;
 import com.logic.finalproject.Order;
 import com.logic.finalproject.User;
 import com.mysql.cj.jdbc.Driver;
-import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
+
 
 public class ShowTable {
 
 private static final Logger logger = LoggerFactory.getLogger(ShowTable.class);
     private final static String ALL_TABLE = "SELECT orders.id, orders.name, orders.date, orders.price, orders.feedback, orders.status, orders.user_id, orders.craftsman_id, craftsman.name as craftsmanName, users.name as username FROM orders LEFT JOIN craftsman ON orders.craftsman_id=craftsman.id LEFT JOIN users ON orders.user_id = users.id";
 
+    /**
+     * This method creates string for request to Data Base, connects. Finally, it returns table,
+     *  that managers see
+     * @author Kuznietsov Rostyslav
+     * @param sort
+     * @param statusFilter
+     * @param craftsmanFilter
+     * @param pagination
+     * @param currentPageIn
+     * @return
+     */
     public static String show1(String sort, String statusFilter, String craftsmanFilter, String pagination, String currentPageIn) {
         logger.info("Start show1" + pagination);
         String commandSQL = ALL_TABLE;
@@ -136,7 +150,7 @@ private static final Logger logger = LoggerFactory.getLogger(ShowTable.class);
         String prevNext = "<table><tr><td width = \"48%\" align = \"right\">" + prev1 + "</td><td width = \"2%\">" + currentPage +
                 "</td><td width = \"48%\" align = \"left\">" + next1 + "</td></tr></table>";
 
-        String sortByStatus = "<form action=\"/mymanagers\" method=\"get\">" +  //""<a href = \"/mymanagers?sort=byStatus\">Status</a>";
+        String sortByStatus = "<form action=\"/mymanagers\" method=\"get\">" +
                 "<input type = \"hidden\" name = \"currentPage\" value = \"" + 1 + "\"/>" +
                 "<input type = \"hidden\" name = \"pagination\" value = \"" + pagination + "\"/>" +
                 "<input type = \"hidden\" name = \"status\" value = \"" + statusFilter + "\"/>" +
@@ -151,7 +165,7 @@ private static final Logger logger = LoggerFactory.getLogger(ShowTable.class);
                 "<input type = \"hidden\" name = \"craftsman\" value = \"" + craftsmanFilter + "\"/>" +
                 "<input type = \"hidden\" name = \"sort\" value = \"byDate\"/>" +
                 "<input type=\"submit\" value=\"Date\" />" +
-                "</form>"; //"<a href = \"/mymanagers?sort=byDate\">Дата</a>";
+                "</form>";
         String sortByPrice = "<form action=\"/mymanagers\" method=\"get\">" +
                 "<input type = \"hidden\" name = \"currentPage\" value = \"1\"/>" +
                 "<input type = \"hidden\" name = \"pagination\" value = \"" + pagination + "\"/>" +
@@ -159,7 +173,7 @@ private static final Logger logger = LoggerFactory.getLogger(ShowTable.class);
                 "<input type = \"hidden\" name = \"craftsman\" value = \"" + craftsmanFilter + "\"/>" +
                 "<input type = \"hidden\" name = \"sort\" value = \"byPrice\"/>" +
                 "<input type=\"submit\" value=\"Price\" />" +
-                "</form>";//"<a href = \"/mymanagers?sort=byPrice\">Стоимость</a>";
+                "</form>";
         String activeFilters = "<br><b> Active filters:</b>  Status: " + statusFilter + ";  Craftsman: " + craftsmanFilter +
                 ";  Sort: " + sort + ";  Total Records: " + totalRecord +
                 ";  Page size: " + pageSize + "; Total Page: " +  totalPage +
@@ -167,7 +181,7 @@ private static final Logger logger = LoggerFactory.getLogger(ShowTable.class);
                 "<a href = \"/mymanagers\">Reset all filters</a> <br>";
 
 String table = activeFilters + prevNext + "<table border = 1 ><tr><td>№ заказа</td><td>описание</td><td>User</td><td>" + sortByStatus + "</td><td>Мастер</td><td>" + sortByDate + "</td><td>" + sortByPrice + "</td></tr>";
- //       for (Order ord : allOrders){
+
         for (int i = (currentPage - 1) * pageSize; i < totalRecord && i < currentPage * pageSize; i++){
             String s = "";
             if(allOrders.get(i).getPrice()==0 && allOrders.get(i).getStatus().equals("PENDING PAYMENT")) {
@@ -196,6 +210,14 @@ String table = activeFilters + prevNext + "<table border = 1 ><tr><td>№ зак
 
 return table + "</table>";
     }
+
+    /**
+     * The method creates table with filters, helps to send filter's parameters
+     * @param sort
+     * @param pagination
+     * @param lang
+     * @return
+     */
     public static String filters(String sort, String pagination, String lang){
 
         String filter = "<p>Filters</p>";
@@ -227,10 +249,17 @@ return table + "</table>";
                 "<input type = \"hidden\" name = \"sort\" value = \"" + sort + "\"/>" +  // sort
                 "</td></tr><tr><td colspan = \"2\"> " +
                 "<input type=\"submit\" value=\"Apply filters\"></td>" +
- //               "<button action = \"/mymanagers\">Reset filters</button></td>" +
                 "</tr></table></form>";
         return filter;
     }
+
+    /**
+     * The method creates pagination in the table with orders on the manager's page
+     * @param sort
+     * @param statusFilter
+     * @param craftsmanFilter
+     * @return
+     */
     public static String pagination(String sort, String statusFilter, String craftsmanFilter){
         String pag = "";
         pag =  "<form action=\"/mymanagers\" method=\"get\"><table><tr><td>Show</td></tr>" +

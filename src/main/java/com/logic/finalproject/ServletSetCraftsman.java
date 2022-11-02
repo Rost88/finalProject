@@ -1,3 +1,8 @@
+/**
+ * The class helps a manager to set a craftsman for the order
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 import jakarta.servlet.*;
@@ -24,22 +29,12 @@ public class ServletSetCraftsman extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String set_ord_craft = request.getParameter("set_ord_craft");
         String orderID = request.getParameter("ordid");
-
         String pagination = request.getParameter("pagination");
         String sort = request.getParameter("sort");
         String status = request.getParameter("status");
         String craftsman = request.getParameter("craftsman");
         String currentPage = request.getParameter("currentPage");
 
-        PrintWriter printWriter = response.getWriter();
-     //   printWriter.println(startPageStartTitle);
-        printWriter.println("Страница записи в БД присвоенного мастера для заказа");
-     //   printWriter.println(finishTitleStartBody("uk"));
-        printWriter.println("Страница записи в БД присвоенного мастера для заказа");
-        printWriter.println("<br>Номер заказа: " + orderID);
-        printWriter.println("<br>ID Мастерa: " + set_ord_craft);
-        printWriter.println(currentPage + " " + pagination + " " + craftsman + " " + status + " " + sort);
-     //   printWriter.println(finishPage);
         logger.info("Try set craftsman id {} to order id {}", set_ord_craft, orderID);
 
         String commandUpdate = "UPDATE orders SET craftsman_id = " + set_ord_craft + " WHERE id = " + orderID;

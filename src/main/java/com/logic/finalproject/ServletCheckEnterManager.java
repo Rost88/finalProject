@@ -1,3 +1,8 @@
+/**
+ * The class checks manager's login and password and take an authorisation in system
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 import com.mysql.cj.jdbc.Driver;
@@ -6,9 +11,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.*;
 
 @WebServlet(name = "ServletCheckEnterManager", value = "/ServletCheckEnterManager")

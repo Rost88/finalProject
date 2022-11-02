@@ -1,3 +1,9 @@
+/**
+ * The class helps user change order's status from "pending payment" to "canceled"
+ *
+ * @author Kuznietsov Rostyslav
+ */
+
 package com.logic.finalproject;
 
 import jakarta.servlet.*;
@@ -19,14 +25,6 @@ public class ServletCancelOrder extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String orderID = request.getParameter("orderID");
-//        PrintWriter printWriter = response.getWriter();
-//        printWriter.println(startPageStartTitle);
-//        printWriter.println("Страница cancel  заказа");
-//       // printWriter.println(finishTitleStartBody("uk"));
-//        printWriter.println("Страница записи в БД отмены для заказа");
-//        printWriter.println("<br>Номер заказа: " + orderID);
-
-       // printWriter.println(finishPage);
 
         String commandUpdate = "UPDATE orders SET status = 'CANCELED' WHERE id = " + orderID;
 

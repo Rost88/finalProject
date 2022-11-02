@@ -1,3 +1,9 @@
+/**
+ * The class helps a craftsman to change order's status from "paid" to "in progress"
+ *
+ * @author Kuznietsov Rostyslav
+ */
+
 package com.logic.finalproject;
 
 import jakarta.servlet.*;
@@ -24,13 +30,6 @@ public class ServletChangeStatusToInProgress extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String orderID = request.getParameter("orderID");
         logger.info("Change order status {}" , orderID);
-//        PrintWriter printWriter = response.getWriter();
-//      //  printWriter.println(startPageStartTitle);
-//        printWriter.println("Страница изменения статуса заказа с PAID to IN PROGRESS");
-//      //  printWriter.println(finishTitleStartBody("uk"));
-//        printWriter.println("Страница изменения статуса заказа с PAID to IN PROGRESS");
-//        printWriter.println("<br> orderID = " + orderID);
-      //  printWriter.println(finishPage);
 
         String commandUpdate = "UPDATE orders SET status = 'IN PROGRESS' WHERE id = " + orderID;
 

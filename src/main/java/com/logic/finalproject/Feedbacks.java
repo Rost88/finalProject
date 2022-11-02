@@ -1,3 +1,9 @@
+/**
+ * The class creates a feedback from a user about a craftsman
+ *
+ * @author Kuznietsov Rostyslav
+ */
+
 package com.logic.finalproject;
 
 public class Feedbacks {

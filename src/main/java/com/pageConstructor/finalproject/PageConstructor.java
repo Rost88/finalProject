@@ -1,9 +1,12 @@
+/**
+ * The class helps to created view for JSP pages with PrintWriter
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.pageConstructor.finalproject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.ResourceBundle;
 
 public class PageConstructor {
@@ -16,8 +19,7 @@ public class PageConstructor {
     }
 
    static ResourceBundle bundle1 = languages.ChooseLanguage.chooseBundle(langv);
-
-    final static String header = "<table width=\"100%\"><tr><td width=\"300px\">" +
+    private final static String header = "<table width=\"100%\"><tr><td width=\"300px\">" +
             "    <a href=\"/\"><img src=\"/images/logo.gif\" align=\"left\"></a> </td><td align = \"center\"> <h3>Phone: +380(88) 888 88 88</h3>" +
             "</td><td width=\"300px\"><form method=\"get\" ><input type=\"hidden\" name=\"lang\" value=\"en\"/>\n" +
             "    <button ><img src=\"/images/en.jpg\"> </button></form><form method=\"get\" ><input type=\"hidden\" name=\"lang\" value=\"uk\"/><button><img src=\"/images/uk.jpg\"> </button></form></td></tr></table>" +
@@ -29,7 +31,7 @@ public class PageConstructor {
             "    <li><a href=\"/team\"> Our team </a> </li>\n" +
             "\n" +
             "</ul> <hr>";
-    final static String headerUk = "<table width=\"100%\"><tr><td width=\"300px\">" +
+    private final static String headerUk = "<table width=\"100%\"><tr><td width=\"300px\">" +
             "    <a href=\"/\"><img src=\"/images/logo.gif\" align=\"left\"></a> </td><td align = \"center\"> <h3>Телефон: +380 (88) 888 88 88</h3>" +
             "</td><td width=\"300px\"><form method=\"get\" ><input type=\"hidden\" name=\"lang\" value=\"en\"/>\n" +
             "    <button ><img src=\"/images/en.jpg\"> </button></form><form method=\"get\" ><input type=\"hidden\" name=\"lang\" value=\"uk\"/><button><img src=\"/images/uk.jpg\"> </button></form></td></tr></table>" +
@@ -41,7 +43,7 @@ public class PageConstructor {
             "    <li><a href=\"/team\"> Наша команда </a> </li>\n" +
             "\n" +
             "</ul> <hr>";
-    public static String footer = "<hr> <footer style=\"background: gainsboro\">" +
+    private final static String footer = "<hr> <footer style=\"background: gainsboro\">" +
             "<table><tr><td align=\"left\">" +
             "<p><a href=\"/autorisation-users\" style=\"text-decoration: none; color: #B22522\">Page for autorisation users </a></p>\n" +
             "<p><a href=\"/registration-users\" style=\"text-decoration: none; color: #B22522\">Page for registration new users </a> </p>\n" +
@@ -50,7 +52,7 @@ public class PageConstructor {
             "  <td align=\"right\"><p><a href=\"/autorisation-craftsmen\" style=\"text-decoration: none; color: #B22522\">Page for autorisation craftsmans </a> </p><p></p></td>\n" +
             "</tr>\n" +
             "</table></footer>";
-    public static String footerUa = "<hr> <footer style=\"background: gainsboro\">" +
+    private static String footerUa = "<hr> <footer style=\"background: gainsboro\">" +
             "<table><tr><td align=\"left\">" +
             "<p><a href=\"/autorisation-users\" style=\"text-decoration: none; color: #B22522\">Сторінка авторизації користувачів </a></p>\n" +
             "<p><a href=\"/registration-users\" style=\"text-decoration: none; color: #B22522\">Сторінка регистрації нових користувачів </a> </p>\n" +
@@ -59,9 +61,15 @@ public class PageConstructor {
             "  <td align=\"right\"><p><a href=\"/autorisation-craftsmen\" style=\"text-decoration: none; color: #B22522\">Сторінка авторизації майстрів </a> </p><p></p></td>\n" +
             "</tr>\n" +
             "</table></footer>";
-    public static String startPageStartTitle = "<html> <head>\n" +
+    public final static String startPageStartTitle = "<html> <head>\n" +
             "        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n" +
             "        <title>";
+
+    /**
+     * Create header for html page
+     * @param language
+     * @return
+     */
     public static String finishTitleStartBody(String language) {
         String f =
         "</title>" +
@@ -74,6 +82,12 @@ public class PageConstructor {
                 }
         return f;
     }
+
+    /**
+     * Create footer end finish html page
+     * @param language
+     * @return
+     */
     public static String finishPage(String language){
         String fp;
         if(language.equals("uk")) {

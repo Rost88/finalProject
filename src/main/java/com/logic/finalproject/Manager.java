@@ -1,3 +1,8 @@
+/**
+ * The class creates the entity "manager"
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 public class Manager extends Parent{

@@ -1,3 +1,8 @@
+/**
+ * The class helps a user to create feedback about a craftsman
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 import jakarta.servlet.*;
@@ -43,11 +48,11 @@ public class ServletLeaveFeedback extends HttpServlet {
 
         String commandUpdate = "UPDATE orders SET feedback = '" + feedback + "' WHERE id = " + orderID;
 
-        PrintWriter printWriter = response.getWriter();
-        printWriter.println("Страница создания отзыва о мастере");
-        printWriter.println("Страница создания отзыва о мастере");
-        printWriter.println("<br> orderID = " + orderID);
-        printWriter.println("<br> feedback = " + feedback);
+//        PrintWriter printWriter = response.getWriter();
+//        printWriter.println("The page, where feedback is created");
+//        printWriter.println("The page, where feedback is created");
+//        printWriter.println("<br> orderID = " + orderID);
+//        printWriter.println("<br> feedback = " + feedback);
 
                 try {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
@@ -57,8 +62,8 @@ public class ServletLeaveFeedback extends HttpServlet {
             statement.executeUpdate(commandUpdate);
             statement.close();
             connection.close();
-            printWriter.println("<br> Feedback was sent ");
-            printWriter.println("<br><a href = \"/user\"> Return to personal page </a>");
+//            printWriter.println("<br> Feedback was sent ");
+//            printWriter.println("<br><a href = \"/user\"> Return to personal page </a>");
         } catch (SQLException e)  {
                     logger.error("Feedback didn't send", e);
             throw new RuntimeException(e);

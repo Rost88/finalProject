@@ -1,3 +1,8 @@
+/**
+ * The class helps a manager to top up user's balance
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 import jakarta.servlet.*;
@@ -37,21 +42,20 @@ public class ServletTopOnUsersBalance extends HttpServlet {
 
         String userID = request.getParameter("userID");
         String sum = request.getParameter("sum");
-
         String pagination = request.getParameter("pagination");
         String sort = request.getParameter("sort");
         String status = request.getParameter("status");
         String craftsman = request.getParameter("craftsman");
         String currentPage = request.getParameter("currentPage");
         logger.info("Trying to top on ballance of user {} at {}", userID, sum);
-        PrintWriter printWriter = response.getWriter();
-        //   printWriter.println(startPageStartTitle);
-        printWriter.println("Страница отправки данных на сервер при пополнении баланса пользователя");
-        //  printWriter.println(finishTitleStartBody(lang));
-        printWriter.println("Страница отправки данных на сервер при пополнении баланса пользователя");
-        printWriter.println(currentPage + " " + pagination + " " + craftsman + " " + status + " " + sort);
-        printWriter.println("user: " + userID + " summa: " + sum);
-        //     printWriter.println(finishPage(lang));
+//        PrintWriter printWriter = response.getWriter();
+//        //   printWriter.println(startPageStartTitle);
+//        printWriter.println("Страница отправки данных на сервер при пополнении баланса пользователя");
+//        //  printWriter.println(finishTitleStartBody(lang));
+//        printWriter.println("Страница отправки данных на сервер при пополнении баланса пользователя");
+//        printWriter.println(currentPage + " " + pagination + " " + craftsman + " " + status + " " + sort);
+//        printWriter.println("user: " + userID + " summa: " + sum);
+//        //     printWriter.println(finishPage(lang));
 
         String commandUpdate = "UPDATE users SET balance = balance + " + sum + " WHERE id = " + userID;
 
@@ -67,16 +71,7 @@ public class ServletTopOnUsersBalance extends HttpServlet {
             logger.error("Top on error", e);
             throw new RuntimeException(e);
         }
-//        if(pagination.equals("null"))
-//            pagination="";
-//        if (currentPage.equals("null"))
-//            currentPage="";
-//        if (status.equals("null"))
-//            status="";
-//        if (craftsman.equals("null"))
-//            craftsman="";
-//        if (sort.equals("null"))
-//            sort="";
+
         String adressRedirect = "/mymanagers?pagination=" + pagination + "&currentPage=" + currentPage +
                 "&sort=" + sort + "&status=" + status + "&craftsman=" + craftsman;
         logger.info("Top on balance successful");

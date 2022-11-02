@@ -1,3 +1,8 @@
+/**
+ * The class helps a manager to change the order's price
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 import jakarta.servlet.*;
@@ -29,13 +34,6 @@ public class ServletChangeOrdersPrice extends HttpServlet {
         String craftsman = request.getParameter("craftsman");
         String currentPage = request.getParameter("currentPage");
 
-//        PrintWriter printWriter = response.getWriter();
-     //   printWriter.println(startPageStartTitle);
-//        printWriter.println("Страница изменения цены заказа");
-     //   printWriter.println(finishTitleStartBody("uk"));
-//        printWriter.println("Order's ID is " + orderID);
-//        printWriter.println("<br>new price must be = " + newPrice);
-//       printWriter.println(currentPage + " " + pagination + " " + craftsman + " " + status + " " + sort);
         String SQLInsert = "UPDATE orders SET price = " + newPrice + " WHERE id = " + orderID;
         logger.info("Manager is changing price, SQLInsert: {}", SQLInsert);
 
@@ -43,9 +41,6 @@ public class ServletChangeOrdersPrice extends HttpServlet {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
 
-//       PreparedStatement preparedStatement = connection.prepareStatement("UPDATE orders (price) WHERE id = 3 VALUES(?)");
-//       preparedStatement.setInt(1, 555);
-//       preparedStatement.executeUpdate();
          Statement statement = connection.createStatement();
               statement.executeUpdate(SQLInsert);
 

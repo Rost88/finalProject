@@ -1,3 +1,8 @@
+/**
+ * The abstract class is the parent of user, manager and craftsman
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 public abstract class Parent {

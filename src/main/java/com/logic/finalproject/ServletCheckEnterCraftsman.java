@@ -1,3 +1,8 @@
+/**
+ * The class checks craftsman's login and password and take an authorisation in system
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 import com.mysql.cj.jdbc.Driver;
@@ -25,23 +30,12 @@ public class ServletCheckEnterCraftsman extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        HttpSession session = request.getSession();
-//        String lang = (String) session.getAttribute("langv");
-//        if(lang==null)
-//            lang="en";
-//        if(request.getParameter("lang")!=null)
-//            lang = request.getParameter("lang");
-//        session.setAttribute("langv",lang);
-//
-//        ResourceBundle bundle = languages.ChooseLanguage.chooseBundle(lang);
+
         logger.info("Enter to doPost craftsman");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         Craftsman craftsman = new Craftsman();
-//        PrintWriter printWriter = response.getWriter();
-//        printWriter.println(startPageStartTitle);
-//        printWriter.println("Check enter Craftsman");
-//        printWriter.println(finishTitleStartBody(lang));
+
         String adressRedirect = "/wrong-password?login=" + login + "&password=" + password;
         try {
             logger.trace("start craftsman try{, connect to DB");
@@ -62,12 +56,6 @@ public class ServletCheckEnterCraftsman extends HttpServlet {
             adressRedirect = "/wrong-login?login=" + login;
 
         }
-
-//        printWriter.println(" <br> <br>" + login + "<br> ");
-//        printWriter.println(bundle.getString("You entered a wrong password") + password);
-//        printWriter.println("<br><a href = /autorisation-craftsmen>" + bundle.getString("Page for autorisation craftsmans") + "</a> ");
-//     //   printWriter.println("<br> Для пользователя, " + login + " " + craftsman.getName() + " настоящий пароль должен быть: " + craftsman.getPassword());
-//        printWriter.println(finishPage(lang));
 
         if(password.equals(craftsman.getPassword())) {
             Cookie craftsmanID = new Cookie("craftsmanID" , craftsman.getId() + "");

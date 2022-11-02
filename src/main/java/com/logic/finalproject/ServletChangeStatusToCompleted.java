@@ -1,3 +1,9 @@
+/**
+ * The class helps a craftsman to change order's status from "in progress" to "completed"
+ *
+ * @author Kuznietsov Rostyslav
+ */
+
 package com.logic.finalproject;
 
 import jakarta.servlet.*;
@@ -24,13 +30,6 @@ public class ServletChangeStatusToCompleted extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String orderID = request.getParameter("orderID");
         logger.info("Change order status {}" , orderID);
-//        PrintWriter printWriter = response.getWriter();
-//     //   printWriter.println(startPageStartTitle);
-//        printWriter.println("Страница изменения статуса заказа с IN PROGRESS TO COMPLETED");
-//        printWriter.println(finishTitleStartBody("uk"));
-//        printWriter.println("Страница изменения статуса заказа с IN PROGRESS TO COMPLETED");
-//        printWriter.println("<br> orderID = " + orderID);
-     //   printWriter.println(finishPage);
 
         String commandUpdate = "UPDATE orders SET status = 'COMPLETED' WHERE id = " + orderID;
 
@@ -40,8 +39,6 @@ public class ServletChangeStatusToCompleted extends HttpServlet {
 
             Statement statement = connection.createStatement();
             statement.executeUpdate(commandUpdate);
-
-
             statement.close();
             connection.close();
         } catch (SQLException e) {

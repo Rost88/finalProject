@@ -1,3 +1,8 @@
+/**
+ * The class helps a user to pay the order
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.logic.finalproject;
 
 import jakarta.servlet.*;
@@ -36,19 +41,6 @@ public class ServletPayOrder extends HttpServlet {
 
         String orderID = request.getParameter("orderID");
         String orderPrice = request.getParameter("orderPrice");
-   //     String userID = request.getParameter("userID");
-
-        PrintWriter printWriter = response.getWriter();
-        printWriter.println(startPageStartTitle);
-        printWriter.println("Страница pay  заказа");
-      //  printWriter.println(finishTitleStartBody("uk"));
-        printWriter.println("Страница записи в БД pay для заказа");
-        printWriter.println("<br>Номер заказа: " + orderID);
-        printWriter.println("<br>userID: " + userID);
-        printWriter.println("<br>orderPrice: " + orderPrice);
-
-      //  printWriter.println(finishPage);
-
         String commandUpdate1 = "UPDATE orders SET status = 'PAID' WHERE id = " + orderID;
         String commandUpdate2 = "UPDATE users SET balance = balance - " + orderPrice + " WHERE id = " + userID;
 
@@ -56,12 +48,17 @@ public class ServletPayOrder extends HttpServlet {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
             connection.setAutoCommit(false);
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(commandUpdate1);
-            statement.executeUpdate(commandUpdate2);
-            connection.commit();
+            try {
+                Statement statement = connection.createStatement();
+                statement.executeUpdate(commandUpdate1);
+                statement.executeUpdate(commandUpdate2);
+                connection.commit();
+                statement.close();
+            } catch (SQLException e) {
+                logger.error("Order was not paid, connection.rollback()", e);
+                connection.rollback();
+            }
 
-            statement.close();
             connection.close();
         } catch (SQLException e) {
             logger.error("Order was not paid", e);
