@@ -1,3 +1,8 @@
+/**
+ * The class shows information for craftsmen, take in DB information about orders and shows on
+ * the page
+ * @author Kuznietsov Rostyslav
+ */
 package com.example.finalproject;
 
 import com.logic.finalproject.Craftsman;
@@ -9,14 +14,12 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import static com.pageConstructor.finalproject.PageConstructor.*;
 
 @WebServlet(name = "ServletCraftsman", value = "/ServletCraftsman")
@@ -78,11 +81,8 @@ public class ServletCraftsman extends HttpServlet {
                 Order ord = new Order();
                 ord.setName(resultSet1.getString("name"));
                 ord.setDescription(resultSet1.getString("description"));
-              //  ord.setPayed(resultSet1.getBoolean("isPayed"));
                 ord.setStatus(resultSet1.getString("status"));
-              //  ord.setPrice(resultSet1.getInt("price"));
                 ord.setId(resultSet1.getInt("id"));
-
                 orders.add(ord);
 
             }
