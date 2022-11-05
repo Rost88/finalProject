@@ -5,6 +5,7 @@
  */
 package com.logic.finalproject;
 
+import com.connection.ConnectionPool;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -45,8 +46,9 @@ public class ServletPayOrder extends HttpServlet {
         String commandUpdate2 = "UPDATE users SET balance = balance - " + orderPrice + " WHERE id = " + userID;
 
         try {
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+//            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+            Connection connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
             try {
                 Statement statement = connection.createStatement();
@@ -54,6 +56,7 @@ public class ServletPayOrder extends HttpServlet {
                 statement.executeUpdate(commandUpdate2);
                 connection.commit();
                 statement.close();
+                logger.info("Order id {}, price {} was paid", orderID, orderPrice);
             } catch (SQLException e) {
                 logger.error("Order was not paid, connection.rollback()", e);
                 connection.rollback();
@@ -65,7 +68,7 @@ public class ServletPayOrder extends HttpServlet {
             throw new RuntimeException(e);
         }
         String addressRedirect = "/user";
-        logger.info("Order id {}, price {} was paid", orderID, orderPrice);
+        logger.info("All ok! Send redirect {}", addressRedirect);
         response.sendRedirect(addressRedirect);
     }
 

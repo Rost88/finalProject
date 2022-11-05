@@ -5,6 +5,7 @@
  */
 package com.logic.finalproject;
 
+import com.connection.ConnectionPool;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -48,22 +49,15 @@ public class ServletLeaveFeedback extends HttpServlet {
 
         String commandUpdate = "UPDATE orders SET feedback = '" + feedback + "' WHERE id = " + orderID;
 
-//        PrintWriter printWriter = response.getWriter();
-//        printWriter.println("The page, where feedback is created");
-//        printWriter.println("The page, where feedback is created");
-//        printWriter.println("<br> orderID = " + orderID);
-//        printWriter.println("<br> feedback = " + feedback);
-
                 try {
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
-
+//            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+            Connection connection = ConnectionPool.getInstance().getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate(commandUpdate);
             statement.close();
             connection.close();
-//            printWriter.println("<br> Feedback was sent ");
-//            printWriter.println("<br><a href = \"/user\"> Return to personal page </a>");
+
         } catch (SQLException e)  {
                     logger.error("Feedback didn't send", e);
             throw new RuntimeException(e);

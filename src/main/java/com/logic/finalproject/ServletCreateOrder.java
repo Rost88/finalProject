@@ -5,6 +5,7 @@
  */
 package com.logic.finalproject;
 
+import com.connection.ConnectionPool;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -48,19 +49,19 @@ public class ServletCreateOrder extends HttpServlet {
                 userID = Integer.parseInt(cook.getValue());
         }
         logger.info("User id {} is trying to create new order", userID);
-        PrintWriter printWriter = response.getWriter();
-        printWriter.println(startPageStartTitle);
-        printWriter.println(" Page create new order and put it in Data base");
-        printWriter.println(finishTitleStartBody(lang));
-        printWriter.println(" Page create new order and put it in Data base");
-        printWriter.println("<br>ID User creates order: " + userID);
-        printWriter.println("<br> Short order's description: " + orderShort);
-        printWriter.println("<br> Full order's description: " + orderFull);
+//        PrintWriter printWriter = response.getWriter();
+//        printWriter.println(startPageStartTitle);
+//        printWriter.println(" Page create new order and put it in Data base");
+//        printWriter.println(finishTitleStartBody(lang));
+//        printWriter.println(" Page create new order and put it in Data base");
+//        printWriter.println("<br>ID User creates order: " + userID);
+//        printWriter.println("<br> Short order's description: " + orderShort);
+//        printWriter.println("<br> Full order's description: " + orderFull);
 
         try {
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
-
+//            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+            Connection connection = ConnectionPool.getInstance().getConnection();
             String creatingOrder = "INSERT INTO orders(name, description, user_id) VALUES (?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(creatingOrder);
             preparedStatement.setString(1, orderShort);
@@ -68,12 +69,12 @@ public class ServletCreateOrder extends HttpServlet {
             preparedStatement.setInt(3, userID);
             preparedStatement.executeUpdate();
             connection.close();
-            printWriter.println("<br> The order was written to Data base ");
+//            printWriter.println("<br> The order was written to Data base ");
         } catch (SQLException e)  {
             logger.error("New order didn't create", e);
         //    throw new RuntimeException(e);
         }
-        printWriter.println(finishPage(lang));
+//        printWriter.println(finishPage(lang));
 
         String adressRedirect = "/user";
         logger.info("User, id {} has created new order");

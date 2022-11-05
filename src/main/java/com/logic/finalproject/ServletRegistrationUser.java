@@ -5,6 +5,7 @@
  */
 package com.logic.finalproject;
 
+import com.connection.ConnectionPool;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -38,9 +39,9 @@ public class ServletRegistrationUser extends HttpServlet {
         logger.info("Registration new user login {}, name {}", login, name);
 
         try {
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
-
+//            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+            Connection connection = ConnectionPool.getInstance().getConnection();
             String registrationUser = "INSERT INTO users(login, name, password) VALUES (?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(registrationUser);
             preparedStatement.setString(1, login);

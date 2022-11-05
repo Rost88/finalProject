@@ -50,7 +50,7 @@
 <p>lang1 <%=lang1%></p>
 <hr>
 <ul class="main-menu">
-    <li class="active"><a href="/"> <%=bundle.getString("Main page")%> </a> </li>
+    <li><a href="/"> <%=bundle.getString("Main page")%> </a> </li>
     <li><a href="/task"> <%=bundle.getString("My task for Final Project")%> </a> </li>
     <li><a href="/road-map"> <%=bundle.getString("Road map")%> </a> </li>
     <li><a href="/team"> <%=bundle.getString("Our team")%> </a> </li>

@@ -31,6 +31,6 @@ class ServletLeaveFeedbackTest {
         verify(request, times(1)).getParameter("orderID");
         verify(response).sendRedirect(adressRedirect);
         verify(request, never()).getSession();
-        verify(printWriter, atLeast(1)).println("Страница создания отзыва о мастере");
+        verify(printWriter, never()).println("Страница создания отзыва о мастере");
     }
 }

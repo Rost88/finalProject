@@ -5,6 +5,7 @@
  */
 package com.logic.finalproject;
 
+import com.connection.ConnectionPool;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -48,20 +49,13 @@ public class ServletTopOnUsersBalance extends HttpServlet {
         String craftsman = request.getParameter("craftsman");
         String currentPage = request.getParameter("currentPage");
         logger.info("Trying to top on ballance of user {} at {}", userID, sum);
-//        PrintWriter printWriter = response.getWriter();
-//        //   printWriter.println(startPageStartTitle);
-//        printWriter.println("Страница отправки данных на сервер при пополнении баланса пользователя");
-//        //  printWriter.println(finishTitleStartBody(lang));
-//        printWriter.println("Страница отправки данных на сервер при пополнении баланса пользователя");
-//        printWriter.println(currentPage + " " + pagination + " " + craftsman + " " + status + " " + sort);
-//        printWriter.println("user: " + userID + " summa: " + sum);
-//        //     printWriter.println(finishPage(lang));
 
         String commandUpdate = "UPDATE users SET balance = balance + " + sum + " WHERE id = " + userID;
 
         try {
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+//            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+            Connection connection = ConnectionPool.getInstance().getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate(commandUpdate);
 

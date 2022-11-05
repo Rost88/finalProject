@@ -5,6 +5,7 @@
  */
 package com.example.finalproject;
 
+import com.connection.ConnectionPool;
 import com.logic.finalproject.Craftsman;
 import com.logic.finalproject.Order;
 import com.mysql.cj.jdbc.Driver;
@@ -64,9 +65,9 @@ public class ServletCraftsman extends HttpServlet {
         Craftsman craftsman = new Craftsman();
         List<Order> orders = new ArrayList<>();
         try {
-            DriverManager.registerDriver(new Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
-
+//            DriverManager.registerDriver(new Driver());
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+            Connection connection = ConnectionPool.getInstance().getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Craftsman WHERE id = '" + id + "';");
             resultSet.next();

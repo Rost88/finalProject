@@ -6,6 +6,7 @@
  */
 package com.example.finalproject;
 
+import com.connection.ConnectionPool;
 import com.logic.finalproject.Craftsman;
 import com.logic.finalproject.Feedbacks;
 import org.slf4j.Logger;
@@ -25,9 +26,10 @@ public class ShowTeam {
     public static String showFeedbacks(int id) {
         List<Feedbacks> allFeedbacks = new ArrayList<>();
         try {
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+//            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
 
+            Connection connection = ConnectionPool.getInstance().getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("select orders.name as ordName, craftsman.name as crName, users.name as usName, orders.feedback from orders, craftsman, users where craftsman_id = " + id + " and  orders.feedback != 'NULL'  and craftsman.id = " + id + " and orders.user_id = users.id");
             while (resultSet.next()) {
@@ -68,8 +70,10 @@ public class ShowTeam {
     public static List<Craftsman> craftsmanList() {
         List<Craftsman> craftsmen = new ArrayList<>();
         try {
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+//            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+            Connection connection = ConnectionPool.getInstance().getConnection();
+
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM craftsman");

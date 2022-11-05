@@ -6,6 +6,7 @@
 
 package com.logic.finalproject;
 
+import com.connection.ConnectionPool;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -34,13 +35,11 @@ public class ServletChangeStatusToInProgress extends HttpServlet {
         String commandUpdate = "UPDATE orders SET status = 'IN PROGRESS' WHERE id = " + orderID;
 
         try {
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
-
+//            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+            Connection connection = ConnectionPool.getInstance().getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate(commandUpdate);
-
-
             statement.close();
             connection.close();
         } catch (SQLException e) {

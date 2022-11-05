@@ -6,6 +6,7 @@
  */
 package com.example.finalproject;
 
+import com.connection.ConnectionPool;
 import com.logic.finalproject.Craftsman;
 import com.logic.finalproject.Order;
 import com.logic.finalproject.User;
@@ -83,9 +84,9 @@ private static final Logger logger = LoggerFactory.getLogger(ShowTable.class);
 
         List<Order> allOrders = new ArrayList<>();
         try {
-            DriverManager.registerDriver(new Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
-
+//            DriverManager.registerDriver(new Driver());
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+            Connection connection = ConnectionPool.getInstance().getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(commandSQL);
 

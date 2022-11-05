@@ -5,6 +5,7 @@
  */
 package com.example.finalproject;
 
+import com.connection.ConnectionPool;
 import com.logic.finalproject.Craftsman;
 import com.logic.finalproject.Order;
 import com.logic.finalproject.User;
@@ -61,8 +62,7 @@ public class ServletUser extends HttpServlet {
         User user = new User();
         List<Order> orders = new ArrayList<>();
         try {
-            DriverManager.registerDriver(new Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+            Connection connection = ConnectionPool.getInstance().getConnection();
 
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM users WHERE login = '" + login + "';");
@@ -84,7 +84,6 @@ public class ServletUser extends HttpServlet {
                 ord.setPrice(resultSet1.getInt("price"));
                 ord.setId(resultSet1.getInt("id"));
                 ord.setCraftsman( new Craftsman(resultSet1.getInt("craftsman_id"), resultSet1.getString("cn")));
-
                 orders.add(ord);
 
             }

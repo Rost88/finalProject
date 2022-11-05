@@ -6,6 +6,7 @@
 
 package com.example.finalproject;
 
+import com.connection.ConnectionPool;
 import com.logic.finalproject.Manager;
 import com.logic.finalproject.Order;
 import jakarta.servlet.*;
@@ -74,9 +75,9 @@ public class ServletManager extends HttpServlet {
             Manager manager = new Manager();
             List<Order> allOrders = new ArrayList<>();
             try {
-                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
-
+//                DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
+//                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+                Connection connection = ConnectionPool.getInstance().getConnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery("SELECT * FROM managers WHERE id = '" + id + "';");
                 resultSet.next();

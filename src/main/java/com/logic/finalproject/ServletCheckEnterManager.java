@@ -5,6 +5,7 @@
  */
 package com.logic.finalproject;
 
+import com.connection.ConnectionPool;
 import com.mysql.cj.jdbc.Driver;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -43,9 +44,9 @@ public class ServletCheckEnterManager extends HttpServlet {
         String adressRedirect = "/wrong-password?login=" + login + "&password=" + password;
         try {
             logger.trace("start try{, connect to DB");
-            DriverManager.registerDriver(new Driver());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
-
+//            DriverManager.registerDriver(new Driver());
+//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
+            Connection connection = ConnectionPool.getInstance().getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM managers WHERE login = '" + login + "';");
             resultSet.next();
