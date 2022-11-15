@@ -79,6 +79,9 @@ public class resource_uk extends ListResourceBundle {
                     {"Top up", "Поповнити"},
                     {"Top up users balance", "Поповнити баланс користувача"},
                     {"User", "Користувач"},
+                    //PageUser
+                    {"Title - User's page" , "Title - Сторінка користувача"},
+                    {"Money on balance" , "Грошей на балансі"},
                     //ServletCraftsman
                     {"ServletCraftsman title" , "Особиста сторінка майстра"},
                     {"Hello" , "Привіт, "},

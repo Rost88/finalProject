@@ -11,6 +11,7 @@
         <error-code>500</error-code>
         <location>/500.html</location>
     </error-page>
+
     <servlet>
         <servlet-name>Task</servlet-name>
         <jsp-file>/task.jsp</jsp-file>
@@ -236,5 +237,12 @@
         <servlet-name>WrongPassword</servlet-name>
         <url-pattern>/wrong-password</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>PageUser</servlet-name>
+        <jsp-file>/PageUser.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PageUser</servlet-name>
+        <url-pattern>/page-user</url-pattern>
+    </servlet-mapping>
         </web-app>

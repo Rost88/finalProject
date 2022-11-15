@@ -38,41 +38,46 @@ public class ServletUser extends HttpServlet {
         if(request.getParameter("lang")!=null)
             lang = request.getParameter("lang");
         session.setAttribute("langv",lang);
-        String login = ""; // = request.getParameter("login");  //надо переделать на Куки!!! даже на сессию!
+//        String login = ""; // = request.getParameter("login");  //надо переделать на Куки!!! даже на сессию!
+//
+//        String entity = "";
+//        int id = 0;
 
-        String entity = "";
-        int id = 0;
+//        Cookie[] cookies = request.getCookies();
+//
+//        if(cookies!=null) {
+//            for (Cookie cook : cookies) {
+//                if (cook.getName().equals("userID"))
+//                    id = Integer.parseInt(cook.getValue());
+////                if (cook.getName().equals("login"))
+////                    login = cook.getValue();
+//                if (cook.getName().equals("entity") && cook.getValue().equals("user")) {
+//                    entity = cook.getValue();
+//                }
+//            }
+//        }
+        User user = (User) session.getAttribute("entityUser");
 
-        Cookie[] cookies = request.getCookies();
 
-        if(cookies!=null) {
-            for (Cookie cook : cookies) {
-                if (cook.getName().equals("userID"))
-                    id = Integer.parseInt(cook.getValue());
-                if (cook.getName().equals("login"))
-                    login = cook.getValue();
-                if (cook.getName().equals("entity") && cook.getValue().equals("user")) {
-                    entity = cook.getValue();
-                }
-            }
-        }
-
-        logger.info("User id {} , login {}", id, login);
-        if(entity.equals("user") && id > 0) {
-        User user = new User();
+ //       if(entity.equals("user") && id > 0) {
+            if(user!=null) {
+//        User user = new User();
+        String login = user.getEmail();
+        int id = user.getId();
+        logger.info("User id {} , login {}, user.id {}", id, login, user.getId());
         List<Order> orders = new ArrayList<>();
         try {
             Connection connection = ConnectionPool.getInstance().getConnection();
 
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM users WHERE login = '" + login + "';");
-            resultSet.next();
-            user.setName(resultSet.getString("name"));
-            user.setEmail(resultSet.getString("login"));
-            user.setBalance(resultSet.getInt("balance"));
-            user.setPassword(resultSet.getString("password"));
-            user.setId(resultSet.getInt("id"));
-            resultSet.close();
+//            ResultSet resultSet = statement.executeQuery("SELECT * FROM users WHERE login = '" + login + "';");
+//            resultSet.next();
+//            user.setName(resultSet.getString("name"));
+//            user.setEmail(resultSet.getString("login"));
+//            user.setBalance(resultSet.getInt("balance"));
+//            user.setPassword(resultSet.getString("password"));
+//            user.setId(resultSet.getInt("id"));
+//            resultSet.close();
             ResultSet resultSet1 = statement.executeQuery("select orders.id, orders.name, orders.description, orders.feedback, orders.status, orders.price, orders.craftsman_id, craftsman.name as cn from orders, craftsman  where craftsman.id = orders.craftsman_id and user_id = (select id from users where login = '" + login + "');");
 
             while (resultSet1.next()){
@@ -94,7 +99,7 @@ public class ServletUser extends HttpServlet {
             logger.error("Catch exception", e);
            throw new RuntimeException(e);
         }
-
+        session.setAttribute("usersOrders", orders);
             PrintWriter printWriter = response.getWriter();
             printWriter.println(startPageStartTitle);
             printWriter.println();
@@ -149,6 +154,8 @@ public class ServletUser extends HttpServlet {
                                 " <input type=\"submit\" value=\"Create new order\" /> </form>" );
             printWriter.println(" <hr>" );
             printWriter.println(finishPage(lang));
+
+          //  getServletContext().getRequestDispatcher("/page-user").forward(request, response);
         } else {
             logger.warn("Something try come in page without rights, redirect to main page");
             response.sendRedirect("/");

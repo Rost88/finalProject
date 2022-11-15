@@ -52,6 +52,7 @@ public class ServletCheckEnterUser extends HttpServlet {
             user.setName(resultSet.getString("name"));
             user.setPassword(resultSet.getString("password"));
             user.setId(resultSet.getInt("id"));
+            user.setBalance(resultSet.getInt("balance"));
             resultSet.close();
             statement.close();
             connection.close();
@@ -71,6 +72,8 @@ public class ServletCheckEnterUser extends HttpServlet {
             response.addCookie(userPass);
             Cookie entity = new Cookie("entity" , "user");
             entity.setMaxAge(3600);
+            user.setEmail(login);//maybe I should do it in resultset
+            session.setAttribute("entityUser", user);
             response.addCookie(entity);
             adressRedirect = "/user";
             logger.info("All ok, user {} id {} came in his userpage" , login, user.getId());

@@ -80,6 +80,9 @@ public class resource extends ListResourceBundle {
                     {"Top up", "Top up"},
                     {"Top up users balance", "Top up the user's balance"},
                     {"User", "User"},
+                    //PageUser
+                    {"Title - User's page" , "Title - User's page"},
+                    {"Money on balance" , "Money on balance"},
                     //ServletCraftsman
                     {"ServletCraftsman title" , "Craftsman's personal page"},
                     {"Hello" , "Hello, "},
