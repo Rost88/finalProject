@@ -95,49 +95,71 @@ public class ServletCraftsman extends HttpServlet {
             logger.error("Catch exception", e);
             throw new RuntimeException(e);
         }
+        session.setAttribute("craftsmanOrders", orders);
         if(entity.equals("craftsmen")) {
 
-            PrintWriter printWriter = response.getWriter();
-            printWriter.println(startPageStartTitle);
-            printWriter.println(bundle.getString("ServletCraftsman title"));
-            printWriter.println(finishTitleStartBody(lang));
-            printWriter.println(" <table width = \"70%\"><tr><td> " + bundle.getString("Hello") + craftsman.getName() + "<img src = \"/images/" + craftsman.getPhoto() + "\" align = \"right\">");
-            printWriter.println("<br>e-mail: " + craftsman.getEmail());
-            printWriter.println("<br>" + bundle.getString("password") + craftsman.getPassword());
-            printWriter.println("</td></tr></table><br><hr>");
-            printWriter.println("<br>" + bundle.getString("my orders") + ": "+
-                    "<table border = 1>" +
-                    "<tr>" +
-                    "<td> " + bundle.getString("Order ID") + " </td>" +
-                    "<td> " + bundle.getString("Order name") + " </td>" +
-                    "<td> " + bundle.getString("Order description") + " </td>" +
-                    "<td> " + bundle.getString("Order status") + " </td>" +
-                    "</tr>");
-            if(orders.size()>0){
-                for (int i = 0; i < orders.size(); i++) {
-                    String status = orders.get(i).getStatus();
-                    if(status.equals("PAID")) {
-                        status = status + "<a href = \"/change-status-to-in-progress?orderID=" +
-                                orders.get(i).getId() + "\">" + bundle.getString("change status to") + " \"in progress\" </a>";
-                    }
-                    if(status.equals("IN PROGRESS")) {
-                        status = status + "<a href = \"/change-status-to-completed?orderID=" +
-                                orders.get(i).getId() + "\"> " + bundle.getString("change status to") + " \"completed\" </a>";
-                    }
-                    printWriter.println("<tr>" +
-                            "<td>" + orders.get(i).getId() + "</td>" +
-                            "<td>" + orders.get(i).getName() + " </td>" +
-                            "<td>" + orders.get(i).getDescription() + "</td>" +
-                            "<td>" + status + "</td>" +
-                            "</tr>");
-                }
-        } else {
-            printWriter.println("<tr><td> " + bundle.getString("You don`t have any orders") + " </td></tr>");
+//            PrintWriter printWriter = response.getWriter();
+//            printWriter.println(startPageStartTitle);
+//            printWriter.println(bundle.getString("ServletCraftsman title"));
+//            printWriter.println(finishTitleStartBody(lang));
+//            printWriter.println(" <table width = \"70%\"><tr><td> " + bundle.getString("Hello") + craftsman.getName() + "<img src = \"/images/" + craftsman.getPhoto() + "\" align = \"right\">");
+//            printWriter.println("<br>e-mail: " + craftsman.getEmail());
+//            printWriter.println("<br>" + bundle.getString("password") + craftsman.getPassword());
+//            printWriter.println("</td></tr></table><br><hr>");
+//            printWriter.println("<br>" + bundle.getString("my orders") + ": "+
+//                    "<table border = 1>" +
+//                    "<tr>" +
+//                    "<td> " + bundle.getString("Order ID") + " </td>" +
+//                    "<td> " + bundle.getString("Order name") + " </td>" +
+//                    "<td> " + bundle.getString("Order description") + " </td>" +
+//                    "<td> " + bundle.getString("Order status") + " </td>" +
+//                    "</tr>");
+//            if(orders.size()>0){
+//                for (int i = 0; i < orders.size(); i++) {
+//                    String status = orders.get(i).getStatus();
+//                    if(status.equals("PAID")) {
+//                        status = status + "<a href = \"/change-status-to-in-progress?orderID=" +
+//                                orders.get(i).getId() + "\">" + bundle.getString("change status to") + " \"in progress\" </a>";
+//                    }
+//                    if(status.equals("IN PROGRESS")) {
+//                        status = status + "<a href = \"/change-status-to-completed?orderID=" +
+//                                orders.get(i).getId() + "\"> " + bundle.getString("change status to") + " \"completed\" </a>";
+//                    }
+//                    printWriter.println("<tr>" +
+//                            "<td>" + orders.get(i).getId() + "</td>" +
+//                            "<td>" + orders.get(i).getName() + " </td>" +
+//                            "<td>" + orders.get(i).getDescription() + "</td>" +
+//                            "<td>" + status + "</td>" +
+//                            "</tr>");
+//                }
+//        } else {
+//            printWriter.println("<tr><td> " + bundle.getString("You don`t have any orders") + " </td></tr>");
+//        }
+//        printWriter.println(" </table>" );
+//        logger.info("Craftsman id {}, name {}", id, craftsman.getName());
+//            printWriter.println(finishPage(lang));
+//       }
+            String craftsmanTitle = bundle.getString("Title - User's page");
+            request.setAttribute("craftsmanTitle", craftsmanTitle);
+            String hello = bundle.getString("Hello");
+            request.setAttribute("hello", hello);
+            String password = bundle.getString("password");
+            request.setAttribute("password", password);
+            String myOrders = bundle.getString("my orders");
+            request.setAttribute("myOrders", myOrders);
+            String ordersID = bundle.getString("Order ID");
+            request.setAttribute("ordersID", ordersID);
+            String orderName = bundle.getString("Order name");//"Order's name";
+            request.setAttribute("orderName", orderName);
+            String ordersFull = bundle.getString("Order description");
+            request.setAttribute("ordersFull", ordersFull);
+            String ordersStatus = bundle.getString("Order status");
+            request.setAttribute("ordersStatus", ordersStatus);
+            String changeStatus = bundle.getString("change status to");
+            request.setAttribute("changeStatus", changeStatus);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page-craftsman");
+            requestDispatcher.forward(request, response);
         }
-        printWriter.println(" </table>" );
-        logger.info("Craftsman id {}, name {}", id, craftsman.getName());
-            printWriter.println(finishPage(lang));
-       }
     }
 
     @Override
