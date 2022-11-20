@@ -245,4 +245,13 @@
         <servlet-name>PageUser</servlet-name>
         <url-pattern>/page-user</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>PageCraftsman</servlet-name>
+        <jsp-file>/PageCraftsman.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PageCraftsman</servlet-name>
+        <url-pattern>/page-craftsman</url-pattern>
+    </servlet-mapping>
+
         </web-app>

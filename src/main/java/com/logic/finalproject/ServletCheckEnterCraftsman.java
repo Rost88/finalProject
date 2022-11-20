@@ -36,6 +36,13 @@ public class ServletCheckEnterCraftsman extends HttpServlet {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         Craftsman craftsman = new Craftsman();
+        HttpSession session = request.getSession();
+        String lang = (String) session.getAttribute("langv");
+        if(lang==null)
+            lang="en";
+        if(request.getParameter("lang")!=null)
+            lang = request.getParameter("lang");
+        session.setAttribute("langv",lang);
 
         String adressRedirect = "/wrong-password?login=" + login + "&password=" + password;
         try {
@@ -49,6 +56,7 @@ public class ServletCheckEnterCraftsman extends HttpServlet {
             craftsman.setName(resultSet.getString("name"));
             craftsman.setPassword(resultSet.getString("password"));
             craftsman.setId(resultSet.getInt("id"));
+            craftsman.setPhoto(resultSet.getString("photo"));
             resultSet.close();
             statement.close();
             connection.close();
@@ -65,9 +73,10 @@ public class ServletCheckEnterCraftsman extends HttpServlet {
             Cookie entity = new Cookie("entity", "craftsmen");
             entity.setMaxAge(3600);
             response.addCookie(entity);
+            craftsman.setEmail(login);
+            session.setAttribute("entityCraftsman", craftsman);
             adressRedirect = "/craftsman";
             logger.info("All ok, craftsman come in");
-
         }
         response.sendRedirect(adressRedirect);
     }

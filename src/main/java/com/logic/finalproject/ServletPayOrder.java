@@ -13,13 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import static com.pageConstructor.finalproject.PageConstructor.*;
 
 @WebServlet(name = "ServletPayOrder", value = "/ServletPayOrder")
 public class ServletPayOrder extends HttpServlet {
@@ -28,17 +24,23 @@ public class ServletPayOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Cookie[] cookies = request.getCookies();
-        int userID = 0;
-        for(Cookie cook : cookies) {
-            if (cook.getName().equals("userID"))
-                userID = Integer.parseInt(cook.getValue());
-        }
-        if(userID == 0) {
+//        Cookie[] cookies = request.getCookies();
+//        int userID = 0;
+//        for(Cookie cook : cookies) {
+//            if (cook.getName().equals("userID"))
+//                userID = Integer.parseInt(cook.getValue());
+//        }
+//        if(userID == 0) {
+//            logger.warn("This entity can't pay this order!");
+//            response.sendRedirect("/");
+//        }
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("entityUser");
+        if(user == null) {
             logger.warn("This entity can't pay this order!");
             response.sendRedirect("/");
-
         }
+        int userID = user.getId();
 
         String orderID = request.getParameter("orderID");
         String orderPrice = request.getParameter("orderPrice");

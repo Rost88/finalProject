@@ -82,10 +82,15 @@ public class resource_uk extends ListResourceBundle {
                     //PageUser
                     {"Title - User's page" , "Title - Сторінка користувача"},
                     {"Money on balance" , "Грошей на балансі"},
+                    {"Order price" , "Вартість замовлення"},
+                    {"Order craftsman" , "Майстер замовлення"},
+                    {"Pay order" , "Сплатити замовлення"},
+                    {"Cancel order" , "Відмінити замовлення"},
+                    {"Create order" , "Створити нове замовлення"},
                     //ServletCraftsman
                     {"ServletCraftsman title" , "Особиста сторінка майстра"},
                     {"Hello" , "Привіт, "},
-                    {"password" , "Пароль: "},
+                    {"password" , "Пароль"},
                     {"my orders" , "Мої замовлення"},
                     {"Order ID" , "ID замовлення"},
                     {"Order name" , "Короткий опис"},

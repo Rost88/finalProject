@@ -83,6 +83,11 @@ public class resource extends ListResourceBundle {
                     //PageUser
                     {"Title - User's page" , "Title - User's page"},
                     {"Money on balance" , "Money on balance"},
+                    {"Order price" , "Order's price"},
+                    {"Order craftsman" , "Order's craftsman"},
+                    {"Pay order" , "Pay order"},
+                    {"Cancel order" , "Cancel order"},
+                    {"Create order" , "Create new order"},
                     //ServletCraftsman
                     {"ServletCraftsman title" , "Craftsman's personal page"},
                     {"Hello" , "Hello, "},

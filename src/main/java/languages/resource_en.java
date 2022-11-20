@@ -87,6 +87,11 @@ public class resource_en extends ListResourceBundle {
                     //PageUser
                     {"Title - User's page" , "Title - User's page"},
                     {"Money on balance" , "Money on balance"},
+                    {"Order price" , "Order's price"},
+                    {"Order craftsman" , "Order's craftsman"},
+                    {"Pay order" , "Pay order"},
+                    {"Cancel order" , "Cancel order"},
+                    {"Create order" , "Create new order"},
                     //ServletCheckEnter
                     {"You entered a wrong password" , "You entered a wrong password: "},
                     {"does not exist" , " does not exist"}

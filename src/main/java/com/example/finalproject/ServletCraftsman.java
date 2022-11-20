@@ -62,21 +62,21 @@ public class ServletCraftsman extends HttpServlet {
             response.sendRedirect("/");
 
         }
-        Craftsman craftsman = new Craftsman();
+        Craftsman craftsman = (Craftsman) session.getAttribute("entityCraftsman");
         List<Order> orders = new ArrayList<>();
         try {
 //            DriverManager.registerDriver(new Driver());
 //            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
             Connection connection = ConnectionPool.getInstance().getConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Craftsman WHERE id = '" + id + "';");
-            resultSet.next();
-            craftsman.setName(resultSet.getString("name"));
-
-            craftsman.setEmail(resultSet.getString("login"));
-            craftsman.setPassword(resultSet.getString("password"));
-            craftsman.setPhoto(resultSet.getString("photo"));
-            resultSet.close();
+//            ResultSet resultSet = statement.executeQuery("SELECT * FROM Craftsman WHERE id = '" + id + "';");
+//            resultSet.next();
+//            craftsman.setName(resultSet.getString("name"));
+//
+//            craftsman.setEmail(resultSet.getString("login"));
+//            craftsman.setPassword(resultSet.getString("password"));
+//            craftsman.setPhoto(resultSet.getString("photo"));
+//            resultSet.close();
             ResultSet resultSet1 = statement.executeQuery("SELECT * FROM orders WHERE craftsman_id = " + id);
             while (resultSet1.next()){
                 Order ord = new Order();
