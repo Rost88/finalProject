@@ -7,10 +7,10 @@
         <error-code>404</error-code>
         <location>/404.html</location>
     </error-page>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/500.html</location>
-    </error-page>
+<!--    <error-page>-->
+<!--        <error-code>500</error-code>-->
+<!--        <location>/500.html</location>-->
+<!--    </error-page>-->
 
     <servlet>
         <servlet-name>Task</servlet-name>
@@ -252,6 +252,14 @@
     <servlet-mapping>
         <servlet-name>PageCraftsman</servlet-name>
         <url-pattern>/page-craftsman</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>PageManager</servlet-name>
+        <jsp-file>/PageManager.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PageManager</servlet-name>
+        <url-pattern>/page-manager</url-pattern>
     </servlet-mapping>
 
         </web-app>

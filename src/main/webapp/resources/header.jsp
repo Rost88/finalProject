@@ -3,7 +3,8 @@
 <%@ page import="languages.ChooseLanguage" %>
 <%@ page import="org.slf4j.Logger" %>
 <%@ page import="org.slf4j.LoggerFactory" %>
-<%@ page import="com.logic.finalproject.ServletCheckEnterManager" %><%--
+<%@ page import="com.logic.finalproject.ServletCheckEnterManager" %>
+<%--
   Created by IntelliJ IDEA.
   User: Rostislav
   Date: 22.10.2022
@@ -22,7 +23,6 @@
        if(request.getParameter("lang")!=null)
         lang = request.getParameter("lang");
 
-
     if(!lang.equals("none"))
     session.setAttribute("langv", lang);
     logger.info("log on header.jsp after get.request");
@@ -32,8 +32,6 @@
     lang1 = (String) session.getAttribute("langv");
     if(lang1!=null)
         lang = (String) lang1;
-
-
 
     ResourceBundle bundle = languages.ChooseLanguage.chooseBundle(lang);
  //   ResourceBundle bundleEN = ResourceBundle.getBundle("languages.resource", new Locale("en"));

@@ -90,7 +90,6 @@ public class ServletUser extends HttpServlet {
                 ord.setUser(user);
                 ord.setCraftsman( new Craftsman(resultSet1.getInt("craftsman_id"), resultSet1.getString("cn")));
                 orders.add(ord);
-
             }
             resultSet1.close();
             statement.close();

@@ -98,6 +98,18 @@ public class resource_uk extends ListResourceBundle {
                     {"Order status" , "Статус замовлення"},
                     {"change status to" , "змінити статус на "},
                     {"You don`t have any orders" , "У вас немає замовлень"},
+                    //PageManager
+                    {"Title - Manager's page" , "Title - Сторінка менеджера "},
+                    {"Choose Status" , "Обрати статус"},
+                    {"Choose Craftsman" , "Обрати майстра"},
+                    {"Apply filters" , "Примінити фільтри"},
+                    {"Show" , "Показати"},
+                    {"Show on the page" , "Показати на сторінці"},
+                    {"Prev" , "Назад"},
+                    {"Next" , "Далі "},
+                    {"Reset all filters" , "Очистити всі фільтри"},
+                    {"Craftsman" , "Майстер"},
+                    {"Orders Data" , "Дата"},
                     //WrongLogin
                     {"You entered a wrong password" , "Ви ввели не вірний пароль: "},
                     {"does not exist" , " не існує"},

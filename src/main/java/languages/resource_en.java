@@ -92,6 +92,18 @@ public class resource_en extends ListResourceBundle {
                     {"Pay order" , "Pay order"},
                     {"Cancel order" , "Cancel order"},
                     {"Create order" , "Create new order"},
+                    //PageManager
+                    {"Title - Manager's page" , "Title - Manager's page"},
+                    {"Choose Status" , "Choose Status"},
+                    {"Choose Craftsman" , "Choose Craftsman"},
+                    {"Apply filters" , "Apply filters"},
+                    {"Show" , "Show"},
+                    {"Show on the page" , "Show on the page"},
+                    {"Prev" , "Prev"},
+                    {"Next" , "Next"},
+                    {"Reset all filters" , "Reset all filters"},
+                    {"Craftsman" , "Craftsman"},
+                    {"Orders Data" , "Data"},
                     //ServletCheckEnter
                     {"You entered a wrong password" , "You entered a wrong password: "},
                     {"does not exist" , " does not exist"}

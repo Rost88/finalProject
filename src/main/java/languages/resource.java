@@ -99,6 +99,18 @@ public class resource extends ListResourceBundle {
                     {"Order status" , "Order status"},
                     {"change status to" , "change status to"},
                     {"You don`t have any orders" , "You don`t have any orders"},
+                    //PageManager
+                    {"Title - Manager's page" , "Title - Manager's page"},
+                    {"Choose Status" , "Choose Status"},
+                    {"Choose Craftsman" , "Choose Craftsman"},
+                    {"Apply filters" , "Apply filters"},
+                    {"Show" , "Show"},
+                    {"Show on the page" , "Show on the page"},
+                    {"Prev" , "Prev"},
+                    {"Next" , "Next"},
+                    {"Reset all filters" , "Reset all filters"},
+                    {"Craftsman" , "Craftsman"},
+                    {"Orders Data" , "Data"},
                     //WrongLogin
                     {"You entered a wrong password" , "You entered a wrong password "},
                     {"does not exist" , " does not exist"},

@@ -11,6 +11,8 @@ import com.logic.finalproject.Craftsman;
 import com.logic.finalproject.Order;
 import com.logic.finalproject.User;
 import com.mysql.cj.jdbc.Driver;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.*;
@@ -21,6 +23,7 @@ import java.util.List;
 public class ShowTable {
 
 private static final Logger logger = LoggerFactory.getLogger(ShowTable.class);
+
     private final static String ALL_TABLE = "SELECT orders.id, orders.name, orders.date, orders.price, orders.feedback, orders.status, orders.user_id, orders.craftsman_id, craftsman.name as craftsmanName, users.name as username FROM orders LEFT JOIN craftsman ON orders.craftsman_id=craftsman.id LEFT JOIN users ON orders.user_id = users.id";
 
     /**
@@ -34,10 +37,10 @@ private static final Logger logger = LoggerFactory.getLogger(ShowTable.class);
      * @param currentPageIn
      * @return
      */
-    public static String show1(String sort, String statusFilter, String craftsmanFilter, String pagination, String currentPageIn) {
+    public static String show1(String sort, String statusFilter, String craftsmanFilter, String pagination, String currentPageIn, HttpServletRequest request) {
         logger.info("Start show1" + pagination);
         String commandSQL = ALL_TABLE;
-
+        HttpSession session = request.getSession();
         switch (statusFilter) {
             case "PENDING PAYMENT" : commandSQL = ALL_TABLE + " WHERE status = 'PENDING PAYMENT'";
             break;
@@ -108,8 +111,9 @@ private static final Logger logger = LoggerFactory.getLogger(ShowTable.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+session.setAttribute("allOrders", allOrders);
         int totalRecord = allOrders.size();
+        session.setAttribute("totalRecord", totalRecord);
         int pageSize;
         if(pagination.equals("10")) {
             pageSize = 10;
@@ -118,12 +122,14 @@ private static final Logger logger = LoggerFactory.getLogger(ShowTable.class);
         } else {
             pageSize = 5;
         }
+        session.setAttribute("pageSize", pageSize);
         logger.info("page size show1 = " + pageSize);
         int currentPage = Integer.parseInt(currentPageIn);
+        session.setAttribute("currentPage", currentPage);
         int totalPage = totalRecord / pageSize;
         if(totalRecord % pageSize != 0)
             totalPage = totalPage + 1;
-
+        session.setAttribute("totalPage", totalPage);
         String prev1 = " ";// "  &lt;&lt; Prev  ";
         if(currentPage > 1) {
             prev1 = "<form action=\"/mymanagers\" method=\"get\">" +
@@ -183,7 +189,9 @@ private static final Logger logger = LoggerFactory.getLogger(ShowTable.class);
 
 String table = activeFilters + prevNext + "<table border = 1 ><tr><td>№ заказа</td><td>описание</td><td>User</td><td>" + sortByStatus + "</td><td>Мастер</td><td>" + sortByDate + "</td><td>" + sortByPrice + "</td></tr>";
 
-        for (int i = (currentPage - 1) * pageSize; i < totalRecord && i < currentPage * pageSize; i++){
+List ordersOnPage = new ArrayList<>();
+for (int i = (currentPage - 1) * pageSize; i < totalRecord && i < currentPage * pageSize; i++){
+    ordersOnPage.add(allOrders.get(i));
             String s = "";
             if(allOrders.get(i).getPrice()==0 && allOrders.get(i).getStatus().equals("PENDING PAYMENT")) {
                 s = "<form action = \"/change-order-price\" method = \"get\">" +
@@ -208,6 +216,7 @@ String table = activeFilters + prevNext + "<table border = 1 ><tr><td>№ зак
             table = table + "<tr><td>" + allOrders.get(i).getId() + "</td><td>" + allOrders.get(i).getName() + "</td><td>" + user + "</td><td>" +allOrders.get(i).getStatus() + "</td><td>" + craft +
                     "</td><td>" + allOrders.get(i).getDate() + "</td><td> Цена заказа:" + allOrders.get(i).getPrice() + s;
         }
+session.setAttribute("ordersOnPage", ordersOnPage);
 
 return table + "</table>";
     }

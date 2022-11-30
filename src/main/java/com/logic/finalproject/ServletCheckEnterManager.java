@@ -53,6 +53,7 @@ public class ServletCheckEnterManager extends HttpServlet {
             manager.setName(resultSet.getString("name"));
             manager.setPassword(resultSet.getString("password"));
             manager.setId(resultSet.getInt("id"));
+            manager.setPhoto(resultSet.getString("photo"));
             resultSet.close();
             statement.close();
             connection.close();
@@ -70,6 +71,8 @@ public class ServletCheckEnterManager extends HttpServlet {
             Cookie entity = new Cookie("entity" , "managers");
             entity.setMaxAge(3600);
             response.addCookie(entity);
+            manager.setEmail(login);
+            session.setAttribute("entityManager", manager);
             adressRedirect = "/mymanagers";
             logger.info("All ok, manager come in");
         }
