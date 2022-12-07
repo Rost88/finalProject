@@ -1,5 +1,6 @@
 # finalProject
-push project to git
+push project to git 
+test in Ubuntu
 
 PROJECT DESCRIPTION
 The task of the final project is to develop a web application that supports the functionality according to the task variant.
