@@ -153,7 +153,14 @@
                 <td>${order.getName()}</td>
                 <td>${order.getUser().getName()}</td>
                 <td>${order.getStatus()}</td>
-                <td>${order.getCraftsman().getName()}</td>
+                <td>
+                    <c:if test="${(order.getCraftsman().getName() eq 'unknown') and (order.getStatus() ne 'CANCELED')}">
+                        <a href='<c:url value="set-craftsman?orderID=${order.getId()}&currentPage=${sessionScope.currentPage}
+                        &pagination=${sessionScope.pagination}&sort=${sessionScope.sort}&status=${sessionScope.checkStatus}
+                        &craftsman=${sessionScope.checkCraftsman}" />'>${order.getCraftsman().getName()} ${setCraftsman}</a>
+                        </c:if>
+
+                </td>
                 <td>${order.getDate()}</td>
                 <td>${order.getPrice()}</td>
             </tr>

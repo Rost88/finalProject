@@ -181,6 +181,8 @@ public class ServletManager extends HttpServlet {
                 request.setAttribute("orderData", orderData);
                 String orderPrice = bundle.getString("Order price");
                 request.setAttribute("orderPrice", orderPrice);
+                String setCraftsman = bundle.getString("Set craftsman");
+                request.setAttribute("setCraftsman", setCraftsman);
 
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page-manager");
                 requestDispatcher.forward(request, response);

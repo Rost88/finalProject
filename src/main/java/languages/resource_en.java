@@ -104,6 +104,7 @@ public class resource_en extends ListResourceBundle {
                     {"Reset all filters" , "Reset all filters"},
                     {"Craftsman" , "Craftsman"},
                     {"Orders Data" , "Data"},
+                    {"Set craftsman" , "Set craftsman"},
                     //ServletCheckEnter
                     {"You entered a wrong password" , "You entered a wrong password: "},
                     {"does not exist" , " does not exist"}

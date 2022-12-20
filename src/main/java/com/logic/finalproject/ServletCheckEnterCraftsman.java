@@ -51,7 +51,7 @@ public class ServletCheckEnterCraftsman extends HttpServlet {
 //            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
             Connection connection = ConnectionPool.getInstance().getConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Craftsman WHERE login = '" + login + "';");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM craftsman WHERE login = '" + login + "';");
             resultSet.next();
             craftsman.setName(resultSet.getString("name"));
             craftsman.setPassword(resultSet.getString("password"));

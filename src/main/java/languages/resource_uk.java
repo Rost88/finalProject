@@ -110,6 +110,7 @@ public class resource_uk extends ListResourceBundle {
                     {"Reset all filters" , "Очистити всі фільтри"},
                     {"Craftsman" , "Майстер"},
                     {"Orders Data" , "Дата"},
+                    {"Set craftsman" , "Призначити майстра"},
                     //WrongLogin
                     {"You entered a wrong password" , "Ви ввели не вірний пароль: "},
                     {"does not exist" , " не існує"},
