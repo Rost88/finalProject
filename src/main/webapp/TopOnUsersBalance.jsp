@@ -1,4 +1,5 @@
-<%@ page import="java.util.ResourceBundle" %><%--
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="jakarta.servlet.http.Cookie" %><%--
   Created by IntelliJ IDEA.
   User: Rostislav
   Date: 28.09.2022
@@ -50,6 +51,7 @@
 <p>
     <%=bundle.getString("User")%>:   <%= userName%>, ID: <%=userID%>
 </p>
+        <p><%=pagination%> <%=sort%> <%=currentPage%></p>
 <form action="/top-on-servlet" method="post">
     <input type="hidden" name="userID" value="<%=userID%>"/>
     <input type = "hidden" name = "pagination" value = "<%=pagination%>"/>

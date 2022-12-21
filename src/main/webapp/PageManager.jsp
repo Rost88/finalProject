@@ -19,7 +19,7 @@
         </td></tr>
         </table><br>
         <hr>
-        <form action="/mymanagers" method="get">
+        <form action="<c:url value="/mymanagers" />" method="get">
             <table>
                 <tr>
                     <td width="50%"> ${сhooseStatus}</td>
@@ -55,7 +55,7 @@
         </form>
         <hr>
         <br>
-        <form action="/mymanagers" method="get">
+        <form action="<c:url value="/mymanagers" />" method="get">
             <table>
                 <tr>
                     <td>${show}</td>
@@ -80,7 +80,7 @@
             <tr>
                 <td width = "48%" align = "right">
                     <c:if test="${sessionScope.currentPage gt 1}">
-                    <form action="/mymanagers" method="get">
+                    <form action="<c:url value="/mymanagers" />" method="get">
                         <input type = "hidden" name = "currentPage" value = "${sessionScope.currentPage - 1}"/>
                         <input type = "hidden" name = "pagination" value = "${sessionScope.pagination}"/>
                         <input type = "hidden" name = "status" value = "${sessionScope.checkStatus}"/>
@@ -93,7 +93,7 @@
                 <td width = "2%"> <c:out value="${sessionScope.currentPage}"/></td>
                 <td width = "48%" align = "left">
                     <c:if test="${sessionScope.currentPage lt sessionScope.totalPage}">
-                    <form action="/mymanagers" method="get">
+                    <form action="<c:url value="/mymanagers" />" method="get">
                         <input type = "hidden" name = "currentPage" value = "${sessionScope.currentPage + 1}"/>
                         <input type = "hidden" name = "pagination" value = "${sessionScope.pagination}"/>
                         <input type = "hidden" name = "status" value = "${sessionScope.checkStatus}"/>
@@ -108,7 +108,7 @@
         <br>
         <hr>
 
-        <p><a href = "/mymanagers?pagination=5&status=&craftsman=&sort=">${resetAllFilters}</a></p> <br>
+        <p><a href = "<c:url value="/mymanagers?pagination=5&status=&craftsman=&sort=" />">${resetAllFilters}</a></p> <br>
 
         <table border = 1 >
             <tr>
@@ -116,7 +116,7 @@
                 <td> ${orderName}</td>
                 <td> ${user}</td>
                 <td>
-                    <form action="/mymanagers" method="get">
+                    <form action="<c:url value="/mymanagers" />" method="get">
                         <input type = "hidden" name = "currentPage" value = "1"/>
                         <input type = "hidden" name = "pagination" value = "${sessionScope.pagination}"/>
                         <input type = "hidden" name = "status" value = "${sessionScope.checkStatus}"/>
@@ -127,7 +127,7 @@
                 </td>
                 <td>${orderCraftsman}</td>
                 <td>
-                    <form action="/mymanagers" method="get">
+                    <form action="<c:url value="/mymanagers" />" method="get">
                         <input type = "hidden" name = "currentPage" value = "1"/>
                         <input type = "hidden" name = "pagination" value = "${sessionScope.pagination}"/>
                         <input type = "hidden" name = "status" value = "${sessionScope.checkStatus}"/>
@@ -137,7 +137,7 @@
                     </form>
                 </td>
                 <td>
-                    <form action="/mymanagers" method="get">
+                    <form action="<c:url value="/mymanagers" />" method="get">
                         <input type = "hidden" name = "currentPage" value = "1"/>
                         <input type = "hidden" name = "pagination" value = "${sessionScope.pagination}"/>
                         <input type = "hidden" name = "status" value = "${sessionScope.checkStatus}"/>
@@ -151,30 +151,48 @@
             <tr>
                 <td>${order.getId()}</td>
                 <td>${order.getName()}</td>
-                <td>${order.getUser().getName()}</td>
+                <td>
+                    <a href = "<c:url value="/top-on?userName=${order.getUser()}&userID=${order.getUser().getId()}&currentPage=${sessionScope.currentPage}&pagination=${sessionScope.pagination}&sort=${sessionScope.sort}&status=${sessionScope.checkStatus}&craftsman=${sessionScope.checkCraftsman}"/>"> top up </a>
+                        ${order.getUser().getName()}
+                </td>
                 <td>${order.getStatus()}</td>
                 <td>
-                    <c:if test="${(order.getCraftsman().getName() eq 'unknown') and (order.getStatus() ne 'CANCELED')}">
-                        <a href='<c:url value="set-craftsman?orderID=${order.getId()}&currentPage=${sessionScope.currentPage}
-                        &pagination=${sessionScope.pagination}&sort=${sessionScope.sort}&status=${sessionScope.checkStatus}
-                        &craftsman=${sessionScope.checkCraftsman}" />'>${order.getCraftsman().getName()} ${setCraftsman}</a>
-                        </c:if>
+                    <c:choose>
+                    <c:when test="${(order.getCraftsman().getName() eq 'unknown') and (order.getStatus() ne 'CANCELED')}">
+                        <a href='<c:url value="set-craftsman?orderID=${order.getId()}&currentPage=${sessionScope.currentPage}&pagination=${sessionScope.pagination}&sort=${sessionScope.sort}&status=${sessionScope.checkStatus}&craftsman=${sessionScope.checkCraftsman}" />'>${order.getCraftsman().getName()} ${setCraftsman}</a>
+                        </c:when>
+                        <c:otherwise>
+                            ${order.getCraftsman().getName()}
+                        </c:otherwise>
+                    </c:choose>
 
                 </td>
                 <td>${order.getDate()}</td>
-                <td>${order.getPrice()}</td>
+                <td>
+                        ${order.getPrice()}
+                    <c:if test="${(order.getPrice() eq 0) and (order.getStatus() ne 'CANCELED')}">
+                            <form action = "<c:url value="/change-order-price" />" method = "get">
+                                <input type = "hidden" name = "pagination" value = "${sessionScope.pagination}"/>
+                                <input type = "hidden" name = "sort" value = "${sessionScope.sort}"/>
+                                <input type = "hidden" name = "status" value = "${sessionScope.checkStatus}"/>
+                                <input type = "hidden" name = "craftsman" value = "${sessionScope.checkCraftsman}"/>
+                                <input type = "hidden" name = "currentPage" value = "${sessionScope.currentPage}"/>
+                                <input type= "number" name = "newprice" placeholder= "new price" min= "1"><button type = "submit" name = "orID" value = "${order.getId()}">Изменить цену</button></form>
+                             </form>
+                    </c:if>
+                </td>
             </tr>
             </c:forEach>
         </table>
-<%--        <p>Active filters: </p>--%>
-<%--        <p>Status: <c:out value="${sessionScope.checkStatus}"/>;--%>
-<%--            Craftsman: <c:out value="${sessionScope.checkCraftsman}"/>;--%>
-<%--            Sort: <c:out value="${sessionScope.sort}"/>;--%>
-<%--            Total Records: <c:out value="${sessionScope.totalRecord}"/>;--%>
-<%--            Page size : <c:out value="${sessionScope.pageSize}"/>;--%>
-<%--            (pagination): <c:out value="${sessionScope.pagination}"/>;--%>
-<%--            Total Page: <c:out value="${sessionScope.totalPage}"/>;--%>
-<%--            Current Page: <c:out value="${sessionScope.currentPage}"/></p>--%>
+        <p>Active filters: </p>
+        <p>Status: <c:out value="${sessionScope.checkStatus}"/>;
+            Craftsman: <c:out value="${sessionScope.checkCraftsman}"/>;
+            Sort: <c:out value="${sessionScope.sort}"/>;
+            Total Records: <c:out value="${sessionScope.totalRecord}"/>;
+            Page size : <c:out value="${sessionScope.pageSize}"/>;
+            (pagination): <c:out value="${sessionScope.pagination}"/>;
+            Total Page: <c:out value="${sessionScope.totalPage}"/>;
+            Current Page: <c:out value="${sessionScope.currentPage}"/></p>
     </div>
     <div class="footer">
         <jsp:include page="/resources/footer.jsp"/>
