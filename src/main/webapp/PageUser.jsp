@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>${userTitle} <c:out value="${sessionScope['entityUser'].getName()}"/></title>
-    <link rel="stylesheet" href="/resources/style.css">
+    <link rel="stylesheet" href="<c:url value="/resources/style.css" />">
 </head>
 <body>
 <div class="wrapper">
@@ -58,7 +58,7 @@
                 <td> ${order.getCraftsman()}
                 <c:if test="${order.getFeedback() eq null}">
                     <c:if test="${order.getStatus() eq 'COMPLETED'}">
-                        <form action="/leave-feedback" method="post">
+                        <form action="<c:url value="/leave-feedback" />" method="post">
                             <input type="hidden" name="orderID" value="${order.getId()}"/>
                             <input type="submit" value="leave a feedback"/>
                         </form>
@@ -69,7 +69,7 @@
             </c:forEach>
         </table>
         <hr>
-        <form action="/create-new-order" method="get">
+        <form action="<c:url value="/create-new-order" />" method="get">
             <input type="submit" value="${createOrder}">
         </form>
         <hr>

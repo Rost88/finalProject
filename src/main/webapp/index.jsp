@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ResourceBundle" %>
 <%@ page import="languages.ChooseLanguage" %>
 <%@ page import="static languages.ChooseLanguage.chooseBundle" %>
@@ -19,7 +20,7 @@
 
 %>
 <head>
-   <link rel="stylesheet" href="/resources/style.css">
+    <link rel="stylesheet" href="<c:url value="/resources/style.css" />">
     <title><%=bundle.getString("indexTitle")%></title>
     <%
         logger.info("bundle1 from title index.jsp {}", bundle.getString("indexTitle"));
@@ -38,7 +39,7 @@
 <h2><%=bundle.getString("index welcome2")%></h2>
 
  <p>
-    <img src="/images/PQ3a.gif">
+    <img src="<c:url value="/images/PQ3a.gif" />">
 </p>
 <p>
 
@@ -47,7 +48,7 @@
  <h3> <%= bundle.getString("index Call us")%> </h3>
 </p>
 <p>
-    <img src="/images/Vwhr.gif">
+    <img src="<c:url value="/images/Vwhr.gif" />">
 </p>
 
 <jsp:include page="resources/footer.jsp"/>

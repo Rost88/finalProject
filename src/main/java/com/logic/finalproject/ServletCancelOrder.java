@@ -10,6 +10,8 @@ import com.connection.ConnectionPool;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,11 +24,12 @@ import static com.pageConstructor.finalproject.PageConstructor.*;
 
 @WebServlet(name = "ServletCancelOrder", value = "/ServletCancelOrder")
 public class ServletCancelOrder extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(ServletCancelOrder.class);
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String orderID = request.getParameter("orderID");
-
+        logger.info("ServletCancelOrder doGet started. OrderID = {}", orderID );
         String commandUpdate = "UPDATE orders SET status = 'CANCELED' WHERE id = " + orderID;
 
         try {
@@ -42,6 +45,7 @@ public class ServletCancelOrder extends HttpServlet {
             throw new RuntimeException(e);
         }
         String adressRedirect = "/user";
+        logger.info("Order id = {} was cancelled. Redirect to page/user", orderID);
         response.sendRedirect(adressRedirect);
     }
 

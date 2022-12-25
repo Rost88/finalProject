@@ -4,6 +4,7 @@ import com.connection.ConnectionPool;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -16,40 +17,35 @@ import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
-class ServletChangeStatusToInProgressTest {
+class ServletSetCraftsmanTest {
     private static MockedStatic<ConnectionPool> cp;
     @BeforeAll
     public static void init(){
-       cp = mockStatic(ConnectionPool.class);
+        cp = mockStatic(ConnectionPool.class);
     }
     @AfterAll
     public static void close(){
         cp.close();
     }
-
     @Test
-    void doGet() throws ServletException, IOException {
-        ServletChangeStatusToInProgress servlet = new ServletChangeStatusToInProgress();
+    void doGet() throws SQLException, ServletException, IOException {
+        ServletSetCraftsman servlet = new ServletSetCraftsman();
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final HttpServletResponse response = mock(HttpServletResponse.class);
-
+        final HttpSession session = mock(HttpSession.class);
         final Connection connection = mock(Connection.class);
         final Statement statement = mock(Statement.class);
         final ConnectionPool instance = mock(ConnectionPool.class);
-        try {
-            cp.when(ConnectionPool::getInstance).thenReturn(instance);
-            when(instance.getConnection()).thenReturn(connection);
-            when(connection.createStatement()).thenReturn(statement);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 
-        String adressRedirect = "/craftsman";
+        cp.when(ConnectionPool::getInstance).thenReturn(instance);
+        when(instance.getConnection()).thenReturn(connection);
+        when(connection.createStatement()).thenReturn(statement);
 
         servlet.doGet(request, response);
-        verify(request, times(1)).getParameter("orderID");
-        verify(response).sendRedirect(adressRedirect);
+        verify(request, times(1)).getParameter("currentPage");
+        verify(response).sendRedirect(any());
         verify(request, never()).getSession();
     }
 }

@@ -24,16 +24,6 @@ public class ServletPayOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        Cookie[] cookies = request.getCookies();
-//        int userID = 0;
-//        for(Cookie cook : cookies) {
-//            if (cook.getName().equals("userID"))
-//                userID = Integer.parseInt(cook.getValue());
-//        }
-//        if(userID == 0) {
-//            logger.warn("This entity can't pay this order!");
-//            response.sendRedirect("/");
-//        }
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("entityUser");
         if(user == null) {
@@ -48,8 +38,6 @@ public class ServletPayOrder extends HttpServlet {
         String commandUpdate2 = "UPDATE users SET balance = balance - " + orderPrice + " WHERE id = " + userID;
 
         try {
-//            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
             Connection connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
             try {

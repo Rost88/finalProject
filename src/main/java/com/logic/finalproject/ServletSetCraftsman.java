@@ -11,15 +11,10 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import static com.pageConstructor.finalproject.PageConstructor.*;
 
 @WebServlet(name = "ServletSetCraftsman", value = "/ServletSetCraftsman")
 public class ServletSetCraftsman extends HttpServlet {
@@ -41,9 +36,7 @@ public class ServletSetCraftsman extends HttpServlet {
         String commandUpdate = "UPDATE orders SET craftsman_id = " + set_ord_craft + " WHERE id = " + orderID;
 
         try {
-//            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
-            Connection connection = ConnectionPool.getInstance().getConnection();
+           Connection connection = ConnectionPool.getInstance().getConnection();
             Statement statement = connection.createStatement();
             statement.executeUpdate(commandUpdate);
 

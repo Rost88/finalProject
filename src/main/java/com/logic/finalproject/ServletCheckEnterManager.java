@@ -73,7 +73,7 @@ public class ServletCheckEnterManager extends HttpServlet {
             response.addCookie(entity);
             manager.setEmail(login);
             session.setAttribute("entityManager", manager);
-            adressRedirect = "/mymanagers";
+            adressRedirect = "mymanagers";
             logger.info("All ok, manager come in");
         }
         response.sendRedirect(adressRedirect);

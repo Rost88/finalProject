@@ -75,7 +75,7 @@ public class ServletCheckEnterCraftsman extends HttpServlet {
             response.addCookie(entity);
             craftsman.setEmail(login);
             session.setAttribute("entityCraftsman", craftsman);
-            adressRedirect = "/craftsman";
+            adressRedirect = "craftsman";
             logger.info("All ok, craftsman come in");
         }
         response.sendRedirect(adressRedirect);

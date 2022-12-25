@@ -5,13 +5,13 @@
  */
 package com.logic.finalproject;
 
+
 import com.connection.ConnectionPool;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -75,7 +75,7 @@ public class ServletCheckEnterUser extends HttpServlet {
             user.setEmail(login);//maybe I should do it in resultset
             session.setAttribute("entityUser", user);
             response.addCookie(entity);
-            adressRedirect = "/user";
+            adressRedirect = "user";
             logger.info("All ok, user {} id {} came in his userpage" , login, user.getId());
         }
         response.sendRedirect(adressRedirect);

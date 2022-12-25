@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.util.ResourceBundle" %><%--
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="jakarta.servlet.http.Cookie" %><%--
   Created by IntelliJ IDEA.
   User: Rostislav
   Date: 20.09.2022
@@ -43,7 +45,7 @@
         %>
 
 </p>
-<form action="/new-order" method="post">
+<form action="<c:url value="/new-order" />" method="post">
 
 
             <p><%=bundle.getString("Order's short description")%></p>
@@ -53,8 +55,7 @@
                 <span class="form__error">This field contains text from 10 to 100 simbols</span></p>
 
             <p><%=bundle.getString("Order's full description")%></p>
-         <%--  <p><input style="height: 200px; weigh: 400px" rows = "5"  type="textarea"  name="full" /></p> --%>
-    <p><textarea  style="height: 200px; weigh: 400px" rows = "5"  name="full"
+            <p><textarea  style="height: 200px; weigh: 400px" rows = "5"  name="full"
                   placeholder="<%=bundle.getString("Order's full description")%> 10 - 500 sim" required minlength="10" maxlength="500"></textarea>
         <span class="form__error">This field contains text from 10 to 100 simbols</span></p>
        <p>

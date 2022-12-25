@@ -42,21 +42,11 @@ public class ServletCreateOrder extends HttpServlet {
         String orderShort = request.getParameter("short");
         String orderFull = request.getParameter("full");
 
-        Cookie[] cookies = request.getCookies();
-        int userID=0;
-        for(Cookie cook : cookies){
-            if(cook.getName().equals("userID"))
-                userID = Integer.parseInt(cook.getValue());
-        }
+        User user = (User) session.getAttribute("entityUser");
+
+         int userID = user.getId();
+
         logger.info("User id {} is trying to create new order", userID);
-//        PrintWriter printWriter = response.getWriter();
-//        printWriter.println(startPageStartTitle);
-//        printWriter.println(" Page create new order and put it in Data base");
-//        printWriter.println(finishTitleStartBody(lang));
-//        printWriter.println(" Page create new order and put it in Data base");
-//        printWriter.println("<br>ID User creates order: " + userID);
-//        printWriter.println("<br> Short order's description: " + orderShort);
-//        printWriter.println("<br> Full order's description: " + orderFull);
 
         try {
 //            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
@@ -69,15 +59,13 @@ public class ServletCreateOrder extends HttpServlet {
             preparedStatement.setInt(3, userID);
             preparedStatement.executeUpdate();
             connection.close();
-//            printWriter.println("<br> The order was written to Data base ");
         } catch (SQLException e)  {
             logger.error("New order didn't create", e);
         //    throw new RuntimeException(e);
         }
-//        printWriter.println(finishPage(lang));
 
         String adressRedirect = "/user";
-        logger.info("User, id {} has created new order");
+        logger.info("User, id {} has created new order", userID);
         response.sendRedirect(adressRedirect);
     }
 }

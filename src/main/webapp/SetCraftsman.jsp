@@ -1,10 +1,6 @@
-<%@ page import="java.util.ResourceBundle" %><%--
-  Created by IntelliJ IDEA.
-  User: Rostislav
-  Date: 27.09.2022
-  Time: 14:23
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="jakarta.servlet.http.Cookie" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%
@@ -48,7 +44,7 @@
 %>
         <p><%=bundle.getString("Set Craftsman for") + orderID %></p>
         <p><%=currentPage + " " + pagination + " " + craftsman + " " + status + " " + sort%></p>
-<form action="/set-craftsman-servlet" method="get">
+<form action="<c:url value="/set-craftsman-servlet" />" method="get">
     <input type="hidden" name="ordid" value="<%= orderID %>"/>
     <input type = "hidden" name = "pagination" value = "<%=pagination%>"/>
     <input type = "hidden" name = "sort" value = "<%=sort%>"/>"

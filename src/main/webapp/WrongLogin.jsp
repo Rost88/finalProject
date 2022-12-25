@@ -1,10 +1,5 @@
-<%@ page import="java.util.ResourceBundle" %><%--
-  Created by IntelliJ IDEA.
-  User: Rostislav
-  Date: 25.10.2022
-  Time: 10:44
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.ResourceBundle" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%
@@ -30,7 +25,7 @@
     <%=login + " " + bundle.getString("does not exist")%>
 </p>
 <p>
-    <a href="/"><%=bundle.getString("back to Main page")%></a>
+    <a href="<c:url value="/" />"><%=bundle.getString("back to Main page")%></a>
 </p>
     </div>
     <div class="footer">

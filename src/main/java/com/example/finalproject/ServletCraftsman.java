@@ -64,81 +64,33 @@ public class ServletCraftsman extends HttpServlet {
         }
         Craftsman craftsman = (Craftsman) session.getAttribute("entityCraftsman");
         List<Order> orders = new ArrayList<>();
-        try {
+        if(craftsman != null) {
+            try {
 //            DriverManager.registerDriver(new Driver());
 //            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "root", "rost1980");
-            Connection connection = ConnectionPool.getInstance().getConnection();
-            Statement statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery("SELECT * FROM Craftsman WHERE id = '" + id + "';");
-//            resultSet.next();
-//            craftsman.setName(resultSet.getString("name"));
-//
-//            craftsman.setEmail(resultSet.getString("login"));
-//            craftsman.setPassword(resultSet.getString("password"));
-//            craftsman.setPhoto(resultSet.getString("photo"));
-//            resultSet.close();
-            ResultSet resultSet1 = statement.executeQuery("SELECT * FROM orders WHERE craftsman_id = " + id);
-            while (resultSet1.next()){
-                Order ord = new Order();
-                ord.setName(resultSet1.getString("name"));
-                ord.setDescription(resultSet1.getString("description"));
-                ord.setStatus(resultSet1.getString("status"));
-                ord.setId(resultSet1.getInt("id"));
-                orders.add(ord);
+                Connection connection = ConnectionPool.getInstance().getConnection();
+                Statement statement = connection.createStatement();
 
+                ResultSet resultSet1 = statement.executeQuery("SELECT * FROM orders WHERE craftsman_id = " + id);
+                while (resultSet1.next()) {
+                    Order ord = new Order();
+                    ord.setName(resultSet1.getString("name"));
+                    ord.setDescription(resultSet1.getString("description"));
+                    ord.setStatus(resultSet1.getString("status"));
+                    ord.setId(resultSet1.getInt("id"));
+                    orders.add(ord);
+                }
+                resultSet1.close();
+                statement.close();
+                connection.close();
+            } catch (SQLException e) {
+                logger.error("Catch exception", e);
+                throw new RuntimeException(e);
             }
-            resultSet1.close();
-
-            statement.close();
-            connection.close();
-        } catch (SQLException e) {
-            logger.error("Catch exception", e);
-            throw new RuntimeException(e);
         }
         session.setAttribute("craftsmanOrders", orders);
         if(entity.equals("craftsmen")) {
 
-//            PrintWriter printWriter = response.getWriter();
-//            printWriter.println(startPageStartTitle);
-//            printWriter.println(bundle.getString("ServletCraftsman title"));
-//            printWriter.println(finishTitleStartBody(lang));
-//            printWriter.println(" <table width = \"70%\"><tr><td> " + bundle.getString("Hello") + craftsman.getName() + "<img src = \"/images/" + craftsman.getPhoto() + "\" align = \"right\">");
-//            printWriter.println("<br>e-mail: " + craftsman.getEmail());
-//            printWriter.println("<br>" + bundle.getString("password") + craftsman.getPassword());
-//            printWriter.println("</td></tr></table><br><hr>");
-//            printWriter.println("<br>" + bundle.getString("my orders") + ": "+
-//                    "<table border = 1>" +
-//                    "<tr>" +
-//                    "<td> " + bundle.getString("Order ID") + " </td>" +
-//                    "<td> " + bundle.getString("Order name") + " </td>" +
-//                    "<td> " + bundle.getString("Order description") + " </td>" +
-//                    "<td> " + bundle.getString("Order status") + " </td>" +
-//                    "</tr>");
-//            if(orders.size()>0){
-//                for (int i = 0; i < orders.size(); i++) {
-//                    String status = orders.get(i).getStatus();
-//                    if(status.equals("PAID")) {
-//                        status = status + "<a href = \"/change-status-to-in-progress?orderID=" +
-//                                orders.get(i).getId() + "\">" + bundle.getString("change status to") + " \"in progress\" </a>";
-//                    }
-//                    if(status.equals("IN PROGRESS")) {
-//                        status = status + "<a href = \"/change-status-to-completed?orderID=" +
-//                                orders.get(i).getId() + "\"> " + bundle.getString("change status to") + " \"completed\" </a>";
-//                    }
-//                    printWriter.println("<tr>" +
-//                            "<td>" + orders.get(i).getId() + "</td>" +
-//                            "<td>" + orders.get(i).getName() + " </td>" +
-//                            "<td>" + orders.get(i).getDescription() + "</td>" +
-//                            "<td>" + status + "</td>" +
-//                            "</tr>");
-//                }
-//        } else {
-//            printWriter.println("<tr><td> " + bundle.getString("You don`t have any orders") + " </td></tr>");
-//        }
-//        printWriter.println(" </table>" );
-//        logger.info("Craftsman id {}, name {}", id, craftsman.getName());
-//            printWriter.println(finishPage(lang));
-//       }
             String craftsmanTitle = bundle.getString("Title - User's page");
             request.setAttribute("craftsmanTitle", craftsmanTitle);
             String hello = bundle.getString("Hello");

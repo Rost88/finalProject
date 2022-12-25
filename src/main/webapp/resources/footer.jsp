@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ResourceBundle" %><%--
   Created by IntelliJ IDEA.
   User: Rostislav
@@ -18,11 +19,11 @@
 <hr>
 <footer style="background: gainsboro">
     <table><tr><td align="left">
-        <p><a href="/autorisation-users" style="text-decoration: none; color: #B22522"><%=bundle.getString("Page for autorisation users")%> </a></p>
-        <p><a href="/registration-users" style="text-decoration: none; color: #B22522"><%=bundle.getString("Page for registration new users")%> </a> </p>
+        <p><a href="<c:url value="/autorisation-users" />" style="text-decoration: none; color: #B22522"><%=bundle.getString("Page for autorisation users")%> </a></p>
+        <p><a href="<c:url value="/registration-users" />" style="text-decoration: none; color: #B22522"><%=bundle.getString("Page for registration new users")%> </a> </p>
     </td>
-        <td><p><a href="/autorisation-managers" style="text-decoration: none; color: #B22522"><%=bundle.getString("Page for autorisation managers")%> </a></p><p></p></td>
-        <td align="right"><p><a href="/autorisation-craftsmen" style="text-decoration: none; color: #B22522"><%=bundle.getString("Page for autorisation craftsmans")%> </a> </p><p></p></td>
+        <td><p><a href="<c:url value="/autorisation-managers" />" style="text-decoration: none; color: #B22522"><%=bundle.getString("Page for autorisation managers")%> </a></p><p></p></td>
+        <td align="right"><p><a href="<c:url value="/autorisation-craftsmen" />" style="text-decoration: none; color: #B22522"><%=bundle.getString("Page for autorisation craftsmans")%> </a> </p><p></p></td>
     </tr>
     </table>
 </footer>

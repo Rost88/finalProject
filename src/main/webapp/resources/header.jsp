@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ResourceBundle" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="languages.ChooseLanguage" %>
@@ -39,19 +40,19 @@
 
 %>
 <table width="100%"><tr><td width="300px">
-    <a href="/"><img src="/images/logo.gif" align="left"></a> </td><td align="center"> <h3><%=bundle.getString("phone")%>: +380(88) 888 88 88</h3>
+    <a href="<c:url value="/" />"><img src="<c:url value="/images/logo.gif" />" align="left"></a> </td><td align="center"> <h3><%=bundle.getString("phone")%>: +380(88) 888 88 88</h3>
 </td><td width="300px"><form method="get" ><input type="hidden" name="lang" value="en"/>
-    <button ><img src="/images/en.jpg"> </button></form><form method="get" ><input type="hidden" name="lang" value="uk"/><button><img src="/images/uk.jpg"> </button></form></td>
+    <button ><img src="<c:url value="/images/en.jpg" />"> </button></form><form method="get" ><input type="hidden" name="lang" value="uk"/><button><img src="<c:url value="/images/uk.jpg" />"> </button></form></td>
 </tr>
 </table>
 <p>lang <%=lang%></p>
 <p>lang1 <%=lang1%></p>
 <hr>
 <ul class="main-menu">
-    <li><a href="/"> <%=bundle.getString("Main page")%> </a> </li>
-    <li><a href="/task"> <%=bundle.getString("My task for Final Project")%> </a> </li>
-    <li><a href="/road-map"> <%=bundle.getString("Road map")%> </a> </li>
-    <li><a href="/team"> <%=bundle.getString("Our team")%> </a> </li>
+    <li><a href="<c:url value="/" />"> <%=bundle.getString("Main page")%> </a> </li>
+    <li><a href="<c:url value="/task" />"> <%=bundle.getString("My task for Final Project")%> </a> </li>
+    <li><a href="<c:url value="/road-map" />"> <%=bundle.getString("Road map")%> </a> </li>
+    <li><a href="<c:url value="/team" />"> <%=bundle.getString("Our team")%> </a> </li>
 
 </ul>
 <hr>

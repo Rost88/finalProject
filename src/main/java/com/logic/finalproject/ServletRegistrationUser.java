@@ -55,6 +55,6 @@ public class ServletRegistrationUser extends HttpServlet {
             throw new RuntimeException(e);
         }
         logger.info("New user was registrated login {} name {}", login, name);
-        response.sendRedirect("/autorisation-users");
+        response.sendRedirect("autorisation-users");
     }
 }

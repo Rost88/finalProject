@@ -190,7 +190,7 @@
             Sort: <c:out value="${sessionScope.sort}"/>;
             Total Records: <c:out value="${sessionScope.totalRecord}"/>;
             Page size : <c:out value="${sessionScope.pageSize}"/>;
-            (pagination): <c:out value="${sessionScope.pagination}"/>;
+<%--            (pagination): <c:out value="${sessionScope.pagination}"/>;--%>
             Total Page: <c:out value="${sessionScope.totalPage}"/>;
             Current Page: <c:out value="${sessionScope.currentPage}"/></p>
     </div>

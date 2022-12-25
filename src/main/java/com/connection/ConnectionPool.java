@@ -1,3 +1,8 @@
+/**
+ * The class creates conection to Data Base
+ *
+ * @author Kuznietsov Rostyslav
+ */
 package com.connection;
 
 import java.sql.Connection;
@@ -9,9 +14,10 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class ConnectionPool {
-
+/**
+ * The constructor have to be private
+*/
     private ConnectionPool(){
-        //private constructor
     }
 
     private static ConnectionPool instance = null;
@@ -27,7 +33,7 @@ public class ConnectionPool {
         Connection connection = null;
         try {
             context = new InitialContext();
-            DataSource dataSource = (DataSource)context.lookup("java:comp/env/jdbc/finalProjectDB");  //откуда java:comp/env/ ???
+            DataSource dataSource = (DataSource)context.lookup("java:comp/env/jdbc/finalProjectDB");
             connection = dataSource.getConnection();
         } catch (NamingException e) {
             e.printStackTrace();

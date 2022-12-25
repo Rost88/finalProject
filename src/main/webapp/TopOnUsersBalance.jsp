@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ResourceBundle" %>
 <%@ page import="jakarta.servlet.http.Cookie" %><%--
   Created by IntelliJ IDEA.
@@ -52,7 +53,7 @@
     <%=bundle.getString("User")%>:   <%= userName%>, ID: <%=userID%>
 </p>
         <p><%=pagination%> <%=sort%> <%=currentPage%></p>
-<form action="/top-on-servlet" method="post">
+<form action="<c:url value="/top-on-servlet" />" method="post">
     <input type="hidden" name="userID" value="<%=userID%>"/>
     <input type = "hidden" name = "pagination" value = "<%=pagination%>"/>
     <input type = "hidden" name = "sort" value ="<%=sort%>"/>

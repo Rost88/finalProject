@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.example.finalproject.ShowTeam" %>
 <%@ page import="java.util.ResourceBundle" %><%--
   Created by IntelliJ IDEA.
@@ -18,7 +19,8 @@
 %>
 <head>
     <title><%=bundle.getString("Our team")%></title>
-  <link rel="stylesheet" href="/resources/style.css">
+  <link rel="stylesheet" href="<c:url value="/resources/style.css" />">
+<%--  <link rel="stylesheet" href="/resources/style.css">--%>
 </head>
 <body>
 <jsp:include page="resources/header.jsp"/>
@@ -31,8 +33,8 @@
     <td><h3><%=bundle.getString("Butt-head")%></h3></td>
   </tr>
   <tr>
-    <td><img src="/images/beavis.png"> </td>
-    <td><img src="/images/butt-head.png"></td>
+    <td><img src="<c:url value="/images/beavis.png" />"> </td>
+    <td><img src="<c:url value="/images/butt-head.png" />"></td>
   </tr>
 </table>
 

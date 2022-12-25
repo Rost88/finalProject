@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ class ServletUserTest {
         final HttpServletRequest request = mock(HttpServletRequest.class);
         final HttpServletResponse response = mock(HttpServletResponse.class);
         final HttpSession session = mock(HttpSession.class);
+        final RequestDispatcher requestDispatcher = mock(RequestDispatcher.class);
         final jakarta.servlet.http.Cookie cookie = mock(jakarta.servlet.http.Cookie.class);
         final Cookie[] cookies = {cookie};
         int id = 1;
@@ -37,6 +39,7 @@ class ServletUserTest {
         when(cookie.getName()).thenReturn("name");
         when(cookie.getValue()).thenReturn("name value");
         when(response.getWriter()).thenReturn(printWriter);
+        when(request.getRequestDispatcher("/page-user")).thenReturn(requestDispatcher);
 
         assertEquals(1, id);
         assertEquals("name", cookie.getName());

@@ -1,4 +1,6 @@
-<%@ page import="java.util.ResourceBundle" %><%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="jakarta.servlet.http.Cookie" %><%--
   Created by IntelliJ IDEA.
   User: Rostislav
   Date: 01.10.2022
@@ -44,7 +46,7 @@
 </p>
         <br>
 <p>
-    <form action="/servlet-leave-feedback" method="post">
+    <form action="<c:url value="/servlet-leave-feedback" />" method="post">
     <input type="hidden" name="orderID" value="<%=orderID%>" />
         <textarea style="height: 200px; weigh: 500px" rows = "5" name="feedback"
                   placeholder="<%=bundle.getString("Leave feedback")%> 5 - 200 simbols" required minlength="5" maxlength="200"></textarea>

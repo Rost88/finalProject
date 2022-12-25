@@ -1,10 +1,5 @@
-<%@ page import="java.util.ResourceBundle" %><%--
-  Created by IntelliJ IDEA.
-  User: Rostislav
-  Date: 13.09.2022
-  Time: 15:52
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.ResourceBundle" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -25,7 +20,7 @@
     <div class="content">
         <jsp:include page="resources/header.jsp"/>
 <br><br>
-<form action="/check-enter-user" method="post">
+<form action="<c:url value="/check-enter-user" />" method="post">
 <center>
     <table style="width: 30%">
         <tr>
